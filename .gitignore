@@ -1,2 +1,3 @@
 iri-edp/iri-src/*.o
 iri-edp/iri-src/iritest
+iri-edp/iri-src/libiri.so

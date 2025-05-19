@@ -1,5 +1,5 @@
 FC := gfortran
-FCFLAGS := -std=legacy
+FCFLAGS := -std=legacy -fPIC
 
 OBJS := \
   irisub.o \
@@ -15,17 +15,20 @@ OBJS_TEST := \
   iritest.o
 
 PROGRAM := iritest
+LIBRARY := libiri.so
 
 # Targets
 .PHONY: all clean
-all: $(PROGRAM)
+all: $(PROGRAM) $(LIBRARY)
 
 $(PROGRAM): $(OBJS) $(OBJS_TEST)
 	$(FC) $(FCFLAGS) $^ -o $@ $(LIBS) $(INC)
+
+$(LIBRARY): $(OBJS)
+	$(FC) $(FCFLAGS) -shared $^ -o $@ $(LIBS) $(INC)
 
 %.o: %.for
 	$(FC) $(FCFLAGS) $(INC) -c $<
 
 clean:
-	rm -f *.o *.mod $(PROGRAM)
-
+	rm -f *.o *.mod $(PROGRAM) $(LIBRARY)
