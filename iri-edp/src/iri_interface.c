@@ -28,20 +28,21 @@ extern void iri_sub_(
 
 /* 
  * Default JF switches array for standard IRI operation
- * Recommended default values from iritest.for
- * -1 => .TRUE., 0 => .FALSE.
+ * Recommended default values from iritest.for,
+ * + ion densities in m-3.
+ * 1 => .TRUE., 0 => .FALSE.
  */
 static int jf[NUM_JF] = {
-    -1,  -1,  -1,   0,   0,  /*  1-5  */
-     0,  -1,  -1,  -1,  -1,  /*  6-10 */
-    -1,  -1,  -1,  -1,  -1,  /* 11-15 */
-    -1,  -1,  -1,  -1,  -1,  /* 16-20 */
-    -1,   0,   0,  -1,  -1,  /* 21-25 */
-    -1,  -1,  -1,  -1,   0,  /* 26-30 */
-    -1,  -1,   0,  -1,   0,  /* 31-35 */
-    -1,  -1,  -1,   0,   0,  /* 36-40 */
-    -1,  -1,  -1,  -1,  -1,  /* 41-45 */
-    -1,   0,  -1,  -1,  -1   /* 46-50 */
+    1, 1, 1, 0, 0,  /*  1-5  */
+    0, 1, 1, 1, 1,  /*  6-10 */
+    1, 1, 1, 1, 1,  /* 11-15 */
+    1, 1, 1, 1, 1,  /* 16-20 */
+    1, 0, 0, 1, 1,  /* 21-25 */
+    1, 1, 1, 1, 0,  /* 26-30 */
+    1, 1, 0, 1, 0,  /* 31-35 */
+    1, 1, 1, 0, 0,  /* 36-40 */
+    1, 1, 1, 1, 1,  /* 41-45 */
+    1, 0, 1, 1, 1   /* 46-50 */
 };
 
 /* Names of IRI output parameters for CSV headers */

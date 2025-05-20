@@ -6,8 +6,8 @@ set -eu
 
 make -j 2
 
-./iri -c 1 > case1.csv
-./iri -c 2 > case2.csv
+./iri -c 1 -o case1.csv
+./iri -c 2 -o case2.csv
 
 gnuplot -p -e " \
   set datafile separator ','; \
