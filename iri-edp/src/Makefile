@@ -1,7 +1,7 @@
 CC := gcc
 FC := gfortran
 CFLAGS = -Wall -g -I.
-FCFLAGS := -std=legacy -fPIC -g -fbacktrace
+FCFLAGS := -std=legacy -g -O0 -fbacktrace -fPIC
 LDFLAGS = -L. -lirif -lgfortran -lm -Wl,-rpath,'$$ORIGIN'
 
 # IRI Fortran, including the iritest program
