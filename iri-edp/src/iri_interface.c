@@ -95,7 +95,6 @@ int iri_heights(
 }
 
 int iri_profile(
-    int jmag,
     double latitude,
     double longitude,
     int year,
@@ -136,6 +135,9 @@ int iri_profile(
 
     /* Calculate MMDD parameter for IRI */
     int mmdd = month * 100 + day;
+
+    /* Assume geographic (= 0, as opposed to geomagnetic, = 1) */
+    int jmag = 0;
 
     /* Call the Fortran IRI_SUB routine */
     iri_sub_(

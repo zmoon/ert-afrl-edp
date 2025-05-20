@@ -33,7 +33,6 @@ int main(int argc, char* argv[]) {
     double h_end = 600.0;
     double h_step = 5.0;
     char* output_file = NULL;
-    int jmag = 0;  /* 0 = geographic, 1 = geomagnetic */
 
     int case_num = 1;
 
@@ -83,7 +82,7 @@ int main(int argc, char* argv[]) {
 
     /* Run the IRI model */
     if (iri_profile(
-        jmag, latitude, longitude, year, month, day, hour,
+        latitude, longitude, year, month, day, hour,
         h_start, h_end, h_step, param_type, values, oarr) != 0) {
         fprintf(stderr, "IRI model calculation failed\n");
         return 1;

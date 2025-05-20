@@ -68,7 +68,6 @@ typedef enum {
 /**
  * @brief Calculate vertical profile for a specific parameter using the IRI model
  * 
- * @param jmag       Coordinate system: 0=geographic, 1=geomagnetic
  * @param latitude   Latitude in degrees North
  * @param longitude  Longitude in degrees East
  * @param year       Year (4 digits)
@@ -85,7 +84,6 @@ typedef enum {
  * @return 0 on success, non-zero on error
  */
 int iri_profile(
-    int jmag,
     double latitude,
     double longitude,
     int year,
