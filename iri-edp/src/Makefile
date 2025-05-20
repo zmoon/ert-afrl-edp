@@ -2,7 +2,7 @@ CC := gcc
 FC := gfortran
 CFLAGS = -Wall -g -I.
 FCFLAGS := -std=legacy -fPIC -g -fbacktrace
-LDFLAGS = -L. -liri -lgfortran -lm -Wl,-rpath,'$$ORIGIN'
+LDFLAGS = -L. -lirif -lgfortran -lm -Wl,-rpath,'$$ORIGIN'
 
 # IRI Fortran, including the iritest program
 IRI_SRC := \
@@ -17,13 +17,13 @@ IRI_SRC := \
 IRI_OBJ := $(IRI_SRC:.for=.o)
 IRITEST_SRC := iritest.for
 IRITEST_OBJ := $(IRITEST_SRC:.for=.o)
-IRILIB := libiri.so
+IRILIB := libirif.so
 IRITEST := iritest
 
 # C interface and command-line program
-CLI_SRC := iri_interface.c iri_profile.c
+CLI_SRC := iri_interface.c iri.c
 CLI_OBJ := $(CLI_SRC:.c=.o)
-CLI := iri-profile
+CLI := iri
 
 all: $(IRILIB) $(IRITEST) $(CLI)
 

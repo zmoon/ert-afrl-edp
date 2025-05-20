@@ -1,7 +1,7 @@
 *.o
+*.so
 iri-edp/src/iritest
-iri-edp/src/libiri.so
 iri-edp/src/messages.txt
-iri-edp/src/iri-profile
+iri-edp/src/iri
 
 .vscode/
