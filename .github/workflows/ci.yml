@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  iri-edp:
+    name: IRI-EDP
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Build project
+      run: |
+        cd iri-edp/src
+        make
+      
+    - name: Run cases
+      run: |
+        cd iri-edp/src
+        ./iri -c 1 -o case1.csv
+        ./iri -c 2 -o case2.csv
+        
+    - name: Upload output files
+      uses: actions/upload-artifact@v4
+      with:
+        name: iri-edp-output
+        path: |
+          iri-edp/src/case1.csv
+          iri-edp/src/case2.csv
+        retention-days: 1
