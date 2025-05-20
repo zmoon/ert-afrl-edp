@@ -45,28 +45,35 @@ static int jf[NUM_JF] = {
 };
 
 /* Names of IRI output parameters for CSV headers */
-static const char* param_names[NUM_OUTF + 1] = {
+static const char* col_names[NUM_PROFILE] = {
     "height(km)",
-    "ne(m-3)",  /* 1: electron number density */
-    "Tn(K)",    /* 2-4: temperatures */
+    /* 1: electron number density */
+    "ne(m-3)",
+    /* 2-4: temperatures */
+    "Tn(K)",
     "Ti(K)",
     "Te(K)",
-    "O+(%)",    /* 5-11: ion densities */
+    /* 5-11: ion densities */
+    "O+(%)",
     "H+(%)",
     "He+(%)",
     "O2+(%)",
     "NO+(%)",
     "CI(%)",
     "N+(%)",
-    "",
-    "",
-    "",  /* 14: misc. column */
-    "PF/GF(1)",
-    "",
-    "",
-    "",
-    "",
-    ""
+    /* 12-13: unmarked in irisub.for */
+    /* 14: misc. column */
+    /* 15: plasma frequency divided by gyro frequency */
+    "PF/GF(1)"
+    /* 16-20: free */
+};
+
+/* One-based indices of the `outf` columns we want to take */
+static const int take_cols[NUM_OUTF_PROFILE] = {
+    1,
+    2, 3, 4,
+    5, 6, 7, 8, 9, 10, 11,
+    15
 };
 
 int iri_init(void) {
@@ -91,11 +98,14 @@ int iri_heights(
     for (int i = 0; i < num_heights; i++) {
         heights[i] = height_start + i * height_step;
     }
+    for (int i = num_heights; i < MAX_HEIGHT; i++) {
+        heights[i] = -1.0;
+    }
 
     return num_heights;
 }
 
-int iri_profile(
+int iri_profiles(
     double latitude,
     double longitude,
     int year,
@@ -105,8 +115,7 @@ int iri_profile(
     double height_start,
     double height_end,
     double height_step,
-    iri_param_t param_type,
-    double values[MAX_HEIGHT]
+    double values[NUM_PROFILE][MAX_HEIGHT]
 ) {
     /* Use single-precision float arrays for Fortran function outputs */
     float f_outf[MAX_HEIGHT][NUM_OUTF];
@@ -157,31 +166,24 @@ int iri_profile(
         f_oarr
     );
 
-    /* Examine the first few rows */
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 50; j++) {
-            printf("f_outf[%d][%d] = %f\n", i, j, f_outf[j][i]);
+    /* Compute heights, which will be the first column in our output */
+    int num_heights = iri_heights(height_start, height_end, height_step, values[0]);
+
+    /* Copy profile results */
+    int i_f;
+    for (int i = 0; i < NUM_OUTF_PROFILE; i++) {
+        i_f = take_cols[i] - 1;
+        for (int j = 0; j < num_heights; j++) {
+            values[i + 1][j] = (float)f_outf[j][i_f];
         }
     }
 
-    /* Copy requested parameter to output array */
-    if (param_type >= IRI_PARAM_FIRST && param_type <= IRI_PARAM_LAST) {
-        for (int i = 0; i < MAX_HEIGHT; i++) {
-            values[i] = (double)f_outf[i][param_type - 1];
-        }
-        
-        return 0; /* Success */
-    } else {
-        return 1; /* Invalid parameter type */
-    }
+    return 0;
 }
 
 int iri_write_csv(
     const char* filename,
-    const double heights[MAX_HEIGHT],
-    const double values[MAX_HEIGHT],
-    int num_heights,
-    iri_param_t param_type
+    const double values[NUM_PROFILE][MAX_HEIGHT]
 ) {
     FILE* fp;
     
@@ -196,19 +198,13 @@ int iri_write_csv(
         fp = stdout;
     }
 
-    /* Validate parameter type */
-    if (param_type < IRI_PARAM_FIRST || param_type > IRI_PARAM_LAST) {
-        fprintf(stderr, "Error: Invalid parameter type %d\n", param_type);
-        if (filename != NULL) fclose(fp);
-        return 1;
-    }
-
     /* Write CSV header */
-    fprintf(fp, "%s,%s\n", param_names[0], param_names[param_type]);
+    fprintf(fp, "%s,%s\n", col_names[0], col_names[1]);
 
     /* Write data rows */
-    for (int i = 0; i < num_heights; i++) {
-        fprintf(fp, "%.6e,%.6e\n", heights[i], values[i]);
+    for (int i = 0; i < MAX_HEIGHT; i++) {
+        if (values[0][i] == -1.0) break;
+        fprintf(fp, "%.6e,%.6e\n", values[0][i], values[1][i]);
     }
 
     /* Close file if not stdout */

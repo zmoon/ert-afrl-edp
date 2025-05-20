@@ -33,12 +33,8 @@ int main(int argc, char* argv[]) {
     double height_end = 600.0;
     double height_step = 5.0;
     char* output_file = NULL;
-
     int case_num = 1;
 
-    /* Default parameter: electron density */
-    iri_param_t param_type = IRI_PARAM_ELECTRON_DENSITY;
-    
     /* Parse command line arguments */
     for (int i = 1; i < argc; i++) {
         if (((strcmp(argv[i], "-c") == 0) || (strcmp(argv[i], "--case") == 0)) && i+1 < argc) {
@@ -72,24 +68,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    /* Calculate height array */
-    double heights[MAX_HEIGHT];
-    int num_heights = iri_heights(height_start, height_end, height_step, heights);
-
-    /* Array to hold parameter values */
-    double values[MAX_HEIGHT];
+    /* Vertical profile outputs */
+    double profiles[NUM_PROFILE][MAX_HEIGHT];
 
     /* Run the IRI model */
-    if (iri_profile(
-        latitude, longitude, year, month, day, hour,
+    if (iri_profiles(
+        latitude, longitude,
+        year, month, day, hour,
         height_start, height_end, height_step,
-        param_type, values) != 0) {
+        profiles) != 0) {
         fprintf(stderr, "IRI model calculation failed\n");
         return 1;
     }
 
     /* Write results to CSV */
-    if (iri_write_csv(output_file, heights, values, num_heights, param_type) != 0) {
+    if (iri_write_csv(output_file, profiles) != 0) {
         fprintf(stderr, "Failed to write CSV output\n");
         return 1;
     }

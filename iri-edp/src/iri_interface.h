@@ -15,8 +15,14 @@
 /* Maximum number of height steps, 2nd dimension in the Fortran `outf` */
 #define MAX_HEIGHT 1000
 
-/* Number of Fortran `outf` columns */
+/* Number of Fortran `outf` array columns */
 #define NUM_OUTF 20
+
+/* Number of Fortran `outf` array columns that have vertical profile data */
+#define NUM_OUTF_PROFILE 12
+
+/* Number of Fortran `outf` array columns that have vertical profile data + 1 for height */
+#define NUM_PROFILE NUM_OUTF_PROFILE + 1
 
 /* Length of the Fortran `oarr` array */
 #define NUM_OARR 100
@@ -53,19 +59,6 @@ int iri_heights(
 );
 
 /**
- * IRI output parameter types for use with iri_profile
- */
-typedef enum {
-    IRI_PARAM_ELECTRON_DENSITY = 1,  /* Electron density in m^-3 */
-    IRI_PARAM_NEUTRAL_TEMP = 2,      /* Neutral temperature in K */
-    IRI_PARAM_ION_TEMP = 3,          /* Ion temperature in K */
-    IRI_PARAM_ELECTRON_TEMP = 4,     /* Electron temperature in K */
-    IRI_PARAM_PF_GF = 15,            /* Plasma frequency / gyro frequency */
-    IRI_PARAM_FIRST = IRI_PARAM_ELECTRON_DENSITY,
-    IRI_PARAM_LAST = IRI_PARAM_PF_GF
-} iri_param_t;
-
-/**
  * @brief Calculate vertical profile for a specific parameter using the IRI model
  * 
  * @param latitude   Latitude in degrees North
@@ -77,12 +70,11 @@ typedef enum {
  * @param height_start    Start height in km
  * @param height_end      End height in km
  * @param height_step     Height step in km
- * @param param_type Parameter type to calculate (see iri_param_t)
- * @param outf       Output array for the profile data
+ * @param values     Output array for the profile data
  * 
  * @return 0 on success, non-zero on error
  */
-int iri_profile(
+int iri_profiles(
     double latitude,
     double longitude,
     int year,
@@ -92,27 +84,20 @@ int iri_profile(
     double height_start,
     double height_end,
     double height_step,
-    iri_param_t param_type,
-    double values[MAX_HEIGHT]
+    double values[NUM_PROFILE][MAX_HEIGHT]
 );
 
 /**
  * @brief Write height and parameter values to a CSV file
  * 
- * @param filename    Output filename, or NULL for stdout
- * @param heights     Array of height values
- * @param values      Array of parameter values
- * @param num_heights Number of height steps
- * @param param_type  Parameter type that was calculated
+ * @param filename  Output filename, or NULL for stdout
+ * @param values    Array of profile values (height first)
  * 
  * @return 0 on success, non-zero on error
  */
 int iri_write_csv(
     const char* filename,
-    const double heights[MAX_HEIGHT],
-    const double values[MAX_HEIGHT],
-    int num_heights,
-    iri_param_t param_type
+    const double values[NUM_PROFILE][MAX_HEIGHT]
 );
 
 #ifdef __cplusplus
