@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     int year = 2021;
     int month = 3;
     int day = 3;
-    double hour = 11.0;
+    double hour = 11.0 + 25.0;
     double height_start = 65.0;
     double height_end = 600.0;
     double height_step = 5.0;
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
         /* Already set */
     } else if (case_num == 2) {
         day = 4;
-        hour = 23.0;
+        hour = 23.0 + 25.0;
     } else {
         fprintf(stderr, "Error: Invalid case number %d (must be 1 or 2)\n", case_num);
         return 1;
