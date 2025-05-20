@@ -18,7 +18,7 @@
 /* Number of Fortran `outf` columns */
 #define NUM_OUTF 20
 
-/* Length of the Fortarn `oarr` array */
+/* Length of the Fortran `oarr` array */
 #define NUM_OARR 100
 
 #ifdef __cplusplus

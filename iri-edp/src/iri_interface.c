@@ -29,7 +29,7 @@ extern void iri_sub_(
 /* 
  * Default JF switches array for standard IRI operation
  * Recommended default values from iritest.for
- * Using Fortran logical values: -1 = .TRUE., 0 = .FALSE.
+ * -1 => .TRUE., 0 => .FALSE.
  */
 static int jf[NUM_JF] = {
     -1,  -1,  -1,   0,   0,  /*  1-5  */
@@ -45,27 +45,28 @@ static int jf[NUM_JF] = {
 };
 
 /* Names of IRI output parameters for CSV headers */
-static const char* param_names[] = {
-    "Height(km)", 
-    "Ne(m^-3)",
-    "Temperature_electron(K)",
-    "Temperature_ion(K)",
-    "Temperature_neutral(K)",
-    "O+(m^-3)",
-    "H+(m^-3)",
-    "He+(m^-3)",
-    "O2+(m^-3)",
-    "NO+(m^-3)",
-    "Cluster_ions(m^-3)",
-    "Ion_density_N+(m^-3)",
-    "TEC(10^16m^-2)",
-    "NmF2(m^-3)",
-    "hmF2(km)",
-    "B0(km)",
-    "NmF1(m^-3)",
-    "hmF1(km)",
-    "NmE(m^-3)",
-    "hmE(km)"
+static const char* param_names[NUM_OUTF + 1] = {
+    "height(km)",
+    "ne(m-3)",  /* 1: electron number density */
+    "Tn(K)",    /* 2-4: temperatures */
+    "Ti(K)",
+    "Te(K)",
+    "O+(%)",    /* 5-11: ion densities */
+    "H+(%)",
+    "He+(%)",
+    "O2+(%)",
+    "NO+(%)",
+    "CI(%)",
+    "N+(%)",
+    "",
+    "",
+    "",  /* 14: misc. column */
+    "PF/GF(1)",
+    "",
+    "",
+    "",
+    "",
+    ""
 };
 
 int iri_init(void) {
