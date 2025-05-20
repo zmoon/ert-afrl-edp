@@ -14,23 +14,11 @@
 void print_usage(const char* progname) {
     printf("Usage: %s [options]\n", progname);
     printf("Options:\n");
-    printf("  -lat <value>      Latitude in degrees North (default: 37.8)\n");
-    printf("  -lon <value>      Longitude in degrees East (default: -75.4)\n");
-    printf("  -year <value>     Year (default: 2021)\n");
-    printf("  -month <value>    Month (1-12) (default: 3)\n");
-    printf("  -day <value>      Day of month (default: 3)\n");
-    printf("  -hour <value>     Local hour (0-24) (default: 11.0)\n");
-    printf("  -hstart <value>   Start height in km (default: 65)\n");
-    printf("  -hend <value>     End height in km (default: 600)\n");
-    printf("  -hstep <value>    Height step in km (default: 5)\n");
-    printf("  -o <filename>     Output file (default: stdout)\n");
-    printf("  -param <type>     Parameter to calculate (default: 1)\n");
-    printf("                    1 = Electron density (m^-3)\n");
-    printf("                    2 = Electron temperature (K)\n");
-    printf("                    3 = Ion temperature (K)\n");
-    printf("                    4 = Neutral temperature (K)\n");
-    printf("  -geom             Use geomagnetic coordinates (default: geographic)\n");
-    printf("  -h                Show this help message\n");
+    printf("  -c|--case <case>     Case number (default: 1)\n");
+    printf("                       - 1: 2021-03-03 11:00 UTC\n");
+    printf("                       - 2: 2021-03-04 23:00 UTC\n");
+    printf("  -o|--out <filename>  Output file (default: stdout)\n");
+    printf("  -h|--help            Show this help message\n");
 }
 
 int main(int argc, char* argv[]) {
@@ -46,43 +34,19 @@ int main(int argc, char* argv[]) {
     double h_step = 5.0;
     char* output_file = NULL;
     int jmag = 0;  /* 0 = geographic, 1 = geomagnetic */
-    
+
+    int case_num = 1;
+
     /* Default parameter: electron density */
     iri_param_t param_type = IRI_PARAM_ELECTRON_DENSITY;
     
     /* Parse command line arguments */
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-lat") == 0 && i+1 < argc) {
-            latitude = atof(argv[++i]);
-        } else if (strcmp(argv[i], "-lon") == 0 && i+1 < argc) {
-            longitude = atof(argv[++i]);
-        } else if (strcmp(argv[i], "-year") == 0 && i+1 < argc) {
-            year = atoi(argv[++i]);
-        } else if (strcmp(argv[i], "-month") == 0 && i+1 < argc) {
-            month = atoi(argv[++i]);
-        } else if (strcmp(argv[i], "-day") == 0 && i+1 < argc) {
-            day = atoi(argv[++i]);
-        } else if (strcmp(argv[i], "-hour") == 0 && i+1 < argc) {
-            hour = atof(argv[++i]);
-        } else if (strcmp(argv[i], "-hstart") == 0 && i+1 < argc) {
-            h_start = atof(argv[++i]);
-        } else if (strcmp(argv[i], "-hend") == 0 && i+1 < argc) {
-            h_end = atof(argv[++i]);
-        } else if (strcmp(argv[i], "-hstep") == 0 && i+1 < argc) {
-            h_step = atof(argv[++i]);
-        } else if (strcmp(argv[i], "-o") == 0 && i+1 < argc) {
+        if (((strcmp(argv[i], "-c") == 0) || (strcmp(argv[i], "--case") == 0)) && i+1 < argc) {
+            case_num = atof(argv[++i]);
+        } else if (((strcmp(argv[i], "-o") == 0) || (strcmp(argv[i], "--out") == 0)) && i+1 < argc) {
             output_file = argv[++i];
-        } else if (strcmp(argv[i], "-param") == 0 && i+1 < argc) {
-            int param_val = atoi(argv[++i]);
-            if (param_val >= 1 && param_val <= NUM_OUTF) {
-                param_type = (iri_param_t)param_val;
-            } else {
-                fprintf(stderr, "Error: Invalid parameter type %d (must be 1-4)\n", param_val);
-                return 1;
-            }
-        } else if (strcmp(argv[i], "-geom") == 0) {
-            jmag = 1;
-        } else if (strcmp(argv[i], "-h") == 0) {
+        } else if ((strcmp(argv[i], "-h") == 0) || (strcmp(argv[i], "--help") == 0)) {
             print_usage(argv[0]);
             return 0;
         } else {
@@ -90,6 +54,17 @@ int main(int argc, char* argv[]) {
             print_usage(argv[0]);
             return 1;
         }
+    }
+
+    /* Set parameters based on case number */
+    if (case_num == 1) {
+        /* Already set */
+    } else if (case_num == 2) {
+        day = 4;
+        hour = 23.0;
+    } else {
+        fprintf(stderr, "Error: Invalid case number %d (must be 1 or 2)\n", case_num);
+        return 1;
     }
 
     /* Calculate MMDD parameter for IRI */
