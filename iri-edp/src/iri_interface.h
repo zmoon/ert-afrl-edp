@@ -72,7 +72,8 @@ typedef enum {
  * @param latitude   Latitude in degrees North
  * @param longitude  Longitude in degrees East
  * @param year       Year (4 digits)
- * @param mmdd       Month and day (MMDD) or day of year as negative number (-DDD)
+ * @param month      Month (1-12)
+ * @param day        Day of month (1-31)
  * @param hour       Local time (or Universal time + 25) in decimal hours
  * @param h_start    Start height in km
  * @param h_end      End height in km
@@ -88,7 +89,8 @@ int iri_profile(
     double latitude,
     double longitude,
     int year,
-    int mmdd,
+    int month,
+    int day,
     double hour,
     double h_start,
     double h_end, 

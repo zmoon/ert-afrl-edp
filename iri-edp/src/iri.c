@@ -67,9 +67,6 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    /* Calculate MMDD parameter for IRI */
-    int mmdd = month * 100 + day;
-
     /* Initialize the IRI model */
     if (iri_init() != 0) {
         fprintf(stderr, "Failed to initialize IRI model\n");
@@ -86,7 +83,7 @@ int main(int argc, char* argv[]) {
 
     /* Run the IRI model */
     if (iri_profile(
-        jmag, latitude, longitude, year, mmdd, hour,
+        jmag, latitude, longitude, year, month, day, hour,
         h_start, h_end, h_step, param_type, values, oarr) != 0) {
         fprintf(stderr, "IRI model calculation failed\n");
         return 1;

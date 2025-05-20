@@ -99,7 +99,8 @@ int iri_profile(
     double latitude,
     double longitude,
     int year,
-    int mmdd,
+    int month,
+    int day,
     double hour,
     double h_start,
     double h_end, 
@@ -132,6 +133,9 @@ int iri_profile(
     if (longitude < 0) {
         longitude += 360.0;
     }
+
+    /* Calculate MMDD parameter for IRI */
+    int mmdd = month * 100 + day;
 
     /* Call the Fortran IRI_SUB routine */
     iri_sub_(
