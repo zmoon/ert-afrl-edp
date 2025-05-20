@@ -1,34 +1,51 @@
+CC := gcc
 FC := gfortran
+CFLAGS = -Wall -g -I.
 FCFLAGS := -std=legacy -fPIC -g -fbacktrace
+LDFLAGS = -L. -liri -lgfortran -lm
 
-OBJS := \
-  irisub.o \
-  irifun.o \
-  iritec.o \
-  iridreg.o \
-  iriflip.o \
-  igrf.o \
-  rocdrift.o \
-  cira.o
+# IRI Fortran, including the iritest program
+IRI_SRC := \
+  irisub.for \
+  irifun.for \
+  iritec.for \
+  iridreg.for \
+  iriflip.for \
+  igrf.for \
+  rocdrift.for \
+  cira.for
+IRI_OBJ := $(IRI_SRC:.for=.o)
+IRITEST_SRC := iritest.for
+IRITEST_OBJ := $(IRITEST_SRC:.for=.o)
+IRILIB := libiri.so
+IRITEST := iritest
 
-OBJS_TEST := \
-  iritest.o
+# C interface and command-line program
+CLI_SRC := iri_interface.c iri_profile.c
+CLI_OBJ := $(CLI_SRC:.c=.o)
+CLI := iri-profile
 
-PROGRAM := iritest
-LIBRARY := libiri.so
+all: $(IRILIB) $(IRITEST) $(CLI)
 
-all: $(PROGRAM) $(LIBRARY)
+$(IRILIB): $(IRI_OBJ)
+	$(FC) $(FCFLAGS) -shared $^ -o $@
 
-$(PROGRAM): $(OBJS) $(OBJS_TEST)
+$(IRITEST): $(IRI_OBJ) $(IRITEST_OBJ)
 	$(FC) $(FCFLAGS) $^ -o $@
 
-$(LIBRARY): $(OBJS)
-	$(FC) $(FCFLAGS) -shared $^ -o $@
+$(CLI): $(CLI_OBJ) $(IRILIB)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 %.o: %.for
 	$(FC) $(FCFLAGS) -c $< -o $@
 
-clean:
-	rm -f $(OBJS) $(PROGRAM) $(LIBRARY)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean
+run: $(CLI)
+	LD_LIBRARY_PATH=. ./$(CLI)
+
+clean:
+	rm -f $(IRI_OBJ) $(IRITEST_OBJ) $(CLI_OBJ) $(IRITEST) $(IRILIB) $(CLI)
+
+.PHONY: all run clean
