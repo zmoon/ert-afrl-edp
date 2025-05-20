@@ -5,7 +5,7 @@
 
 This project provides a C interface and command-line tool for generating
 vertical profiles of electron density and other parameters
-using the IRI-2020 model.
+using the IRI-2020 model, which is a legacy Fortran code.
 
 ### IRI-2020 Version
 
@@ -44,12 +44,21 @@ Run the two cases of interest, save the data to `.csv` files, and view the plots
 * IRI expects the data files it needs to load to be found in the current working directory.
   Preprocessor macros could be used to set a relative or absolute (for install) directory
   to load those files from to improve the run experience.
-* With the default `jf` flags and my current build setup, I'm only getting values (non-`-1`)
-  for the first `outf` column (EDP) and parts of 14 (the misc. column)
 * Building a C API this way requires care in setting the correct types in the C side,
-  including passing integers for Booleans (Fortran `logical`), ensuring integer/float
-  precision is the same as on the Fortran side, and considering the opposite multi-dimensional
-  array storage order.
+  including passing the correct integers for Booleans (Fortran `logical`),
+  ensuring integer/float precision is the same as on the Fortran side,
+  and considering the opposite multi-dimensional array storage order.
+  Personally, I would prefer to write the C interface in Fortran
+  using `iso_c_binding` (F2003).
 * Accounting for Fortran name mangling manually is fragile, as it may be different
   for other platforms and Fortran compilers.
-  Building the C interface in Fortran with `iso_c_binding` (F2003) would help alleviate this issue.
+  Writing the C interface in Fortran with `iso_c_binding` (F2003) would help alleviate this issue.
+* We could write the plotting script in C instead without much fuss:
+  ```c
+  FILE *gnuplot = popen("gnuplot -p", "w");
+  if (!gnuplot) {
+      perror("Failed to open gnuplot");
+      return 1;
+  }
+  fprintf(gnuplot, "plot ...\n");
+  ```
