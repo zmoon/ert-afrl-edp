@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     int month = 3;
     int day = 3;
     double hour = 11.0 + 25.0;
-    double height_start = 80.0;
+    double height_start = 70.0;
     double height_end = 600.0;
     double height_step = 10.0;
     char* output_file = NULL;
