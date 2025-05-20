@@ -1,5 +1,5 @@
 FC := gfortran
-FCFLAGS := -std=legacy -fPIC
+FCFLAGS := -std=legacy -fPIC -g -fbacktrace
 
 OBJS := \
   irisub.o \
