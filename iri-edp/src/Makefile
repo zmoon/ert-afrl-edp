@@ -2,7 +2,7 @@ CC := gcc
 FC := gfortran
 CFLAGS = -Wall -g -I.
 FCFLAGS := -std=legacy -fPIC -g -fbacktrace
-LDFLAGS = -L. -liri -lgfortran -lm
+LDFLAGS = -L. -liri -lgfortran -lm -Wl,-rpath,'$$ORIGIN'
 
 # IRI Fortran, including the iritest program
 IRI_SRC := \
@@ -43,7 +43,7 @@ $(CLI): $(CLI_OBJ) $(IRILIB)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(CLI)
-	LD_LIBRARY_PATH=. ./$(CLI)
+	./$(CLI)
 
 clean:
 	rm -f $(IRI_OBJ) $(IRITEST_OBJ) $(CLI_OBJ) $(IRITEST) $(IRILIB) $(CLI)
