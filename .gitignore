@@ -3,5 +3,6 @@
 iri-edp/src/iritest
 iri-edp/src/messages.txt
 iri-edp/src/iri
+iri-edp/src/*.csv
 
 .vscode/
