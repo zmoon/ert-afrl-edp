@@ -1,7 +1,7 @@
 *.o
-iri-edp/iri-src/iritest
-iri-edp/iri-src/libiri.so
-iri-edp/iri-src/messages.txt
-iri-edp/src/iri_profile
+iri-edp/src/iritest
+iri-edp/src/libiri.so
+iri-edp/src/messages.txt
+iri-edp/src/iri-profile
 
 .vscode/
