@@ -17,18 +17,18 @@ OBJS_TEST := \
 PROGRAM := iritest
 LIBRARY := libiri.so
 
-# Targets
-.PHONY: all clean
 all: $(PROGRAM) $(LIBRARY)
 
 $(PROGRAM): $(OBJS) $(OBJS_TEST)
-	$(FC) $(FCFLAGS) $^ -o $@ $(LIBS) $(INC)
+	$(FC) $(FCFLAGS) $^ -o $@
 
 $(LIBRARY): $(OBJS)
-	$(FC) $(FCFLAGS) -shared $^ -o $@ $(LIBS) $(INC)
+	$(FC) $(FCFLAGS) -shared $^ -o $@
 
 %.o: %.for
-	$(FC) $(FCFLAGS) $(INC) -c $<
+	$(FC) $(FCFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o *.mod $(PROGRAM) $(LIBRARY)
+	rm -f $(OBJS) $(PROGRAM) $(LIBRARY)
+
+.PHONY: all clean
