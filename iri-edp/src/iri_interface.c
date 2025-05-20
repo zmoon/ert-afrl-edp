@@ -156,12 +156,6 @@ int iri_profile(
         f_oarr
     );
 
-    /* Calculate number of height steps */
-    int num_heights = (int)((height_end - height_start) / height_step) + 1;
-    if (num_heights > MAX_HEIGHT) {
-        num_heights = MAX_HEIGHT;
-    }
-
     /* Examine the first few rows */
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 50; j++) {
@@ -171,7 +165,7 @@ int iri_profile(
 
     /* Copy requested parameter to output array */
     if (param_type >= IRI_PARAM_FIRST && param_type <= IRI_PARAM_LAST) {
-        for (int i = 0; i < num_heights; i++) {
+        for (int i = 0; i < MAX_HEIGHT; i++) {
             values[i] = (double)f_outf[i][param_type - 1];
         }
         
