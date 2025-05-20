@@ -129,11 +129,6 @@ int iri_profiles(
     float f_height_end = (float)height_end;
     float f_height_step = (float)height_step;
 
-    /* Convert longitude from [-180, 180) to [0, 360) if necessary */
-    if (longitude < 0) {
-        longitude += 360.0;
-    }
-
     /* Calculate MMDD parameter for IRI */
     int mmdd = month * 100 + day;
 
