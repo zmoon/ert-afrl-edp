@@ -199,12 +199,25 @@ int iri_write_csv(
     }
 
     /* Write CSV header */
-    fprintf(fp, "%s,%s\n", col_names[0], col_names[1]);
+    for (int i = 0; i < NUM_PROFILE; i++) {
+        fprintf(fp, "%s", col_names[i]);
+        if (i < NUM_PROFILE - 1) {
+            fprintf(fp, ",");
+        }
+    }
+    fprintf(fp, "\n");
 
     /* Write data rows */
     for (int i = 0; i < MAX_HEIGHT; i++) {
         if (values[0][i] == -1.0) break;
-        fprintf(fp, "%.6e,%.6e\n", values[0][i], values[1][i]);
+
+        for (int j = 0; j < NUM_PROFILE; j++) {
+            fprintf(fp, values[j][i] == -1.0 ? "%.1e" : "%.6e", values[j][i]);
+            if (j < NUM_PROFILE - 1) {
+                fprintf(fp, ",");
+            }
+        }
+        fprintf(fp, "\n");
     }
 
     /* Close file if not stdout */
