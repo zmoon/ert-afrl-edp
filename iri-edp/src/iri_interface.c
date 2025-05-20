@@ -77,18 +77,18 @@ int iri_init(void) {
 }
 
 int iri_heights(
-    double h_start,
-    double h_end,
-    double h_step,
+    double height_start,
+    double height_end,
+    double height_step,
     double heights[MAX_HEIGHT]
 ) {
-    int num_heights = (int)((h_end - h_start) / h_step) + 1;
+    int num_heights = (int)((height_end - height_start) / height_step) + 1;
     if (num_heights > MAX_HEIGHT) {
         num_heights = MAX_HEIGHT;
     }
 
     for (int i = 0; i < num_heights; i++) {
-        heights[i] = h_start + i * h_step;
+        heights[i] = height_start + i * height_step;
     }
 
     return num_heights;
@@ -101,9 +101,9 @@ int iri_profile(
     int month,
     int day,
     double hour,
-    double h_start,
-    double h_end, 
-    double h_step,
+    double height_start,
+    double height_end,
+    double height_step,
     iri_param_t param_type,
     double values[MAX_HEIGHT]
 ) {
@@ -115,9 +115,9 @@ int iri_profile(
     float f_latitude = (float)latitude;
     float f_longitude = (float)longitude;
     float f_hour = (float)hour;
-    float f_h_start = (float)h_start;
-    float f_h_end = (float)h_end;
-    float f_h_step = (float)h_step;
+    float f_height_start = (float)height_start;
+    float f_height_end = (float)height_end;
+    float f_height_step = (float)height_step;
 
     /* Convert longitude from [-180, 180) to [0, 360) if necessary */
     if (longitude < 0) {
@@ -149,15 +149,15 @@ int iri_profile(
         &year,
         &mmdd,
         &f_hour,
-        &f_h_start,
-        &f_h_end,
-        &f_h_step,
+        &f_height_start,
+        &f_height_end,
+        &f_height_step,
         f_outf,
         f_oarr
     );
 
     /* Calculate number of height steps */
-    int num_heights = (int)((h_end - h_start) / h_step) + 1;
+    int num_heights = (int)((height_end - height_start) / height_step) + 1;
     if (num_heights > MAX_HEIGHT) {
         num_heights = MAX_HEIGHT;
     }

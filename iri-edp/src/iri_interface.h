@@ -38,17 +38,17 @@ int iri_init(void);
 /**
  * @brief Calculate height array based on start, end, and step, filling `heights`
  * 
- * @param h_start    Start height in km
- * @param h_end      End height in km
- * @param h_step     Height step in km
- * @param heights    Output array to store heights
+ * @param height_start    Start height in km
+ * @param height_end      End height in km
+ * @param height_step     Height step in km
+ * @param heights         Output array to store heights
  * 
  * @return Number of height steps calculated
  */
 int iri_heights(
-    double h_start,
-    double h_end,
-    double h_step,
+    double height_start,
+    double height_end,
+    double height_step,
     double heights[MAX_HEIGHT]
 );
 
@@ -74,9 +74,9 @@ typedef enum {
  * @param month      Month (1-12)
  * @param day        Day of month (1-31)
  * @param hour       Local time (or Universal time + 25) in decimal hours
- * @param h_start    Start height in km
- * @param h_end      End height in km
- * @param h_step     Height step in km
+ * @param height_start    Start height in km
+ * @param height_end      End height in km
+ * @param height_step     Height step in km
  * @param param_type Parameter type to calculate (see iri_param_t)
  * @param outf       Output array for the profile data
  * 
@@ -89,9 +89,9 @@ int iri_profile(
     int month,
     int day,
     double hour,
-    double h_start,
-    double h_end, 
-    double h_step,
+    double height_start,
+    double height_end,
+    double height_step,
     iri_param_t param_type,
     double values[MAX_HEIGHT]
 );
