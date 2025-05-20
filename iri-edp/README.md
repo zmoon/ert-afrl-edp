@@ -28,3 +28,6 @@ so I elected to use the current IRI-2020.
   including passing integers for Booleans (Fortran `logical`), ensuring integer/float
   precision is the same as on the Fortran side, and considering the opposite multi-dimensional
   array storage order.
+* Accounting for Fortran name mangling manually is fragile, as it may be different
+  for other platforms and Fortran compilers.
+  Building the C interface in Fortran with `iso_c_binding` (F2003) would help alleviate this issue.
