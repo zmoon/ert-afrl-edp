@@ -9,7 +9,7 @@ on:
 
 jobs:
   iri-edp:
-    name: IRI-EDP
+    name: IRI EDP
     runs-on: ubuntu-latest
     defaults:
       run:
