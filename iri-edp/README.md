@@ -62,3 +62,16 @@ Run the two cases of interest, save the data to `.csv` files, and view the plots
   }
   fprintf(gnuplot, "plot ...\n");
   ```
+
+## See Also
+
+* <https://github.com/space-physics/iri2020>: Python (and Matlab) wrapper for
+  an older version of IRI-2020 (~ 2023),
+  with a command-line IRI [driver written in Modern Fortran](https://github.com/space-physics/iri2020/blob/a609211dce6f101e4e84dae30083942e70272786/src/iri2020/src/iri_driver.f90)
+  that writes the outputs to stdout.
+  The Python driver calls this CLI.
+  It gets around the data location issue
+  [by using](https://github.com/space-physics/iri2020/blob/a609211dce6f101e4e84dae30083942e70272786/src/iri2020/base.py#L56)
+  a child process with working directory changed to the data directory.
+* <https://github.com/timduly4/pyglow>: Python wrapper of IRI and other similar models.
+  [Uses f2py](https://github.com/timduly4/pyglow/blob/1988757f3b6a4bd5ed98266a3fb1dc64f2513fc5/src/pyglow/iri.py#L195). It doesn't (currently) have IRI-2020, only older versions.
