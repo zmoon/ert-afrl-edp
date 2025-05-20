@@ -105,8 +105,7 @@ int iri_profile(
     double h_end, 
     double h_step,
     iri_param_t param_type,
-    double values[MAX_HEIGHT],
-    double oarr[NUM_OARR]
+    double values[MAX_HEIGHT]
 ) {
     /* Use single-precision float arrays for Fortran function outputs */
     float f_outf[MAX_HEIGHT][NUM_OUTF];
@@ -119,14 +118,6 @@ int iri_profile(
     float f_h_start = (float)h_start;
     float f_h_end = (float)h_end;
     float f_h_step = (float)h_step;
-    
-    /* Initialize oarr and f_oarr */
-    for (int i = 0; i < NUM_OARR; i++) {
-        f_oarr[i] = -1.0f;
-        if (oarr != NULL) {
-            oarr[i] = -1.0;
-        }
-    }
 
     /* Convert longitude from [-180, 180) to [0, 360) if necessary */
     if (longitude < 0) {
@@ -138,6 +129,16 @@ int iri_profile(
 
     /* Assume geographic (= 0, as opposed to geomagnetic, = 1) */
     int jmag = 0;
+
+    /* Initialize output arrays */
+    for (int i = 0; i < MAX_HEIGHT; i++) {
+        for (int j = 0; j < NUM_OUTF; j++) {
+            f_outf[i][j] = -1.0f;
+        }
+    }
+    for (int i = 0; i < NUM_OARR; i++) {
+        f_oarr[i] = -1.0f;
+    }
 
     /* Call the Fortran IRI_SUB routine */
     iri_sub_(
@@ -172,13 +173,6 @@ int iri_profile(
     if (param_type >= IRI_PARAM_FIRST && param_type <= IRI_PARAM_LAST) {
         for (int i = 0; i < num_heights; i++) {
             values[i] = (double)f_outf[i][param_type - 1];
-        }
-        
-        /* Copy oarr values if not NULL */
-        if (oarr != NULL) {
-            for (int i = 0; i < NUM_OARR; i++) {
-                oarr[i] = (double)f_oarr[i];
-            }
         }
         
         return 0; /* Success */

@@ -79,7 +79,6 @@ typedef enum {
  * @param h_step     Height step in km
  * @param param_type Parameter type to calculate (see iri_param_t)
  * @param outf       Output array for the profile data
- * @param oarr       Additional output parameters (can be NULL if not needed)
  * 
  * @return 0 on success, non-zero on error
  */
@@ -94,8 +93,7 @@ int iri_profile(
     double h_end, 
     double h_step,
     iri_param_t param_type,
-    double values[MAX_HEIGHT],
-    double oarr[NUM_OARR]
+    double values[MAX_HEIGHT]
 );
 
 /**

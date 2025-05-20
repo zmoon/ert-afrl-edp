@@ -78,12 +78,11 @@ int main(int argc, char* argv[]) {
 
     /* Array to hold parameter values */
     double values[MAX_HEIGHT];
-    double oarr[NUM_OARR];
 
     /* Run the IRI model */
     if (iri_profile(
         latitude, longitude, year, month, day, hour,
-        h_start, h_end, h_step, param_type, values, oarr) != 0) {
+        h_start, h_end, h_step, param_type, values) != 0) {
         fprintf(stderr, "IRI model calculation failed\n");
         return 1;
     }
