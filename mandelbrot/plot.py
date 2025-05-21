@@ -18,8 +18,13 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 
-# Run the script
-# params = {"width": 600, "height": 400, "scale": 0.005}
+
+def to_sci(x: float, *, fmt: str = "{:.2g}") -> str:
+    s = fmt.format(x)
+    if "e" in s:
+        a, b = s.split("e")
+        s = rf"{a} \times 10^{{{int(b)}}}"
+    return s
 
 
 def plot(data) -> None:
@@ -55,10 +60,24 @@ def plot(data) -> None:
             data["metadata"]["minY"],
             data["metadata"]["maxY"],
         ],
-        interpolation="bilinear",
         cmap="hot_r",
     )
+
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    ax.text(
+        0.01,
+        0.99,
+        rf"$\Delta x = {to_sci(xlim[1] - xlim[0])}$"
+        "\n"
+        rf"$\Delta y = {to_sci(ylim[1] - ylim[0])}$",
+        ha="left",
+        va="top",
+        transform=ax.transAxes,
+        color="limegreen",
+    )
     ax.set_aspect("equal")
+    ax.set_axis_off()
     fig.tight_layout()
 
 
