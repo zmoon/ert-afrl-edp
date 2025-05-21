@@ -92,7 +92,7 @@ def main() -> None:
         "-i",
         "--input",
         type=Path,
-        help="Input JSON file (stdin takes precedence)",
+        help="Input JSON file (default: stdin)",
     )
     parser.add_argument(
         "-o",
