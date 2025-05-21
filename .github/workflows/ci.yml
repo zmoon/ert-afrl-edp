@@ -17,6 +17,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends gnuplot
       
     - name: Build project
       run: |
@@ -36,6 +41,16 @@ jobs:
         path: |
           iri-edp/src/case1.csv
           iri-edp/src/case2.csv
+        retention-days: 1
+
+    - name: Upload plots
+      uses: actions/upload-artifact@v4
+      with:
+        name: iri-edp-plots
+        path: |
+          iri-edp/src/edp.png
+          iri-edp/src/temp.png
+          iri-edp/src/ratio.png
         retention-days: 1
 
   mandelbrot:

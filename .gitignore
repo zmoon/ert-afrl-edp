@@ -4,6 +4,7 @@ iri-edp/src/iritest
 iri-edp/src/messages.txt
 iri-edp/src/iri
 iri-edp/src/*.csv
+iri-edp/src/*.png
 
 node_modules/
 package-lock.json
