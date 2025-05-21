@@ -22,7 +22,7 @@ uv run ./plots.py
   but it needs Delaunay triangulation.
   May add it later.
 
-## See Also
+## See also
 
 - [`metpy.interpolate`](https://unidata.github.io/MetPy/v1.7/api/generated/metpy.interpolate.html)
   includes many interpolation methods, including natural neighbor

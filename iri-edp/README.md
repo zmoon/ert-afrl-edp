@@ -1,4 +1,4 @@
-# IRI-EDP: Electron Density Profile Generator
+# IRI-EDP: electron density profile generator
 
 - IRI: the [International Reference Ionosphere](https://irimodel.org/) model
 - EDP: electron density profile
@@ -7,7 +7,7 @@ This project provides a C interface and command-line tool for generating
 vertical profiles of electron density and other parameters
 using the IRI-2020 model, which is a legacy Fortran code.
 
-### IRI-2020 Version
+### IRI-2020 version
 
 I was instructed to use IRI-2020 (12/20/2024), but the current IRI-2020 is dated 03/20/2025.
 The Wayback Machine has the previous version:
@@ -66,7 +66,7 @@ Run the two cases of interest, save the data to `.csv` files, and view the plots
   Ultimately I'd want to separate the IRI input data files from the Fortran and C source files,
   and place the plotting script elsewhere.
 
-## See Also
+## See also
 
 - <https://github.com/space-physics/iri2020>: Python (and Matlab) wrapper for
   an older version of IRI-2020 (~ 2023),

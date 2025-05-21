@@ -1,6 +1,6 @@
-# ERT-AFRL Space Weather
+# ERT-AFRL space weather
 
-_Assessment exercises for an ERT-AFRL position_
+_Assessment exercises for an ERT-AFRL scientific software engineer position related to impacts of the ionosphere_
 
 [![CI workflow status](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml/badge.svg)](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml)
 
