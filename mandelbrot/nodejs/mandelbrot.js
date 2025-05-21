@@ -7,7 +7,7 @@
  * @param {number} x - Real component of the complex number
  * @param {number} y - Imaginary component of the complex number
  * @param {number} maxIterations - Maximum iterations to perform
- * @param {number} bound - Divergence cutoff
+ * @param {number} bound - Divergence cutoff ("escape radius")
  * @param {number} power - Exponent used in the Mandelbrot equation
  * @returns {number} - Number of iterations before divergence, or maxIterations if it doesn't diverge
  */
