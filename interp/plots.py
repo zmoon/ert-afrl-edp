@@ -38,7 +38,7 @@ def idw(xi, yi, zi, xg, yg, *, power=2):
     # Calculate the distance from each point to the grid points
     # We need an array of shape (xg.size, xi.size),
     # so this becomes memory-intensive pretty quickly.
-    d = np.sqrt((xg[:, np.newaxis] - xi)**2 + (yg[:, np.newaxis] - yi)**2)
+    d = np.sqrt((xg[:, np.newaxis] - xi) ** 2 + (yg[:, np.newaxis] - yi) ** 2)
     d[d == 0] = np.finfo(d.dtype).eps  # Avoid division by zero
 
     # Calculate the normalized weights
@@ -104,9 +104,11 @@ def plots(*, show: bool = False) -> None:
     powers = [1.2, 2, 3]
 
     fig, axs = plt.subplots(
-        len(powers), 1,
+        len(powers),
+        1,
         figsize=(4.2, 8),
-        sharex=True, sharey=True,
+        sharex=True,
+        sharey=True,
         layout="constrained",
     )
 

@@ -89,20 +89,26 @@ def main() -> None:
         description="Plot Mandelbrot set data from the Node.js script",
     )
     parser.add_argument(
-        "-i", "--input", type=Path,
+        "-i",
+        "--input",
+        type=Path,
         help="Input JSON file (stdin takes precedence)",
     )
     parser.add_argument(
-        "-o", "--output", type=Path,
+        "-o",
+        "--output",
+        type=Path,
         default=Path("./out.jpg"),
         help="Output JPEG file name or stem (default: out.jpg)",
     )
     parser.add_argument(
-        "--show", action="store_true",
+        "--show",
+        action="store_true",
         help="Show the plot",
     )
     parser.add_argument(
-        "--version", action="version",
+        "--version",
+        action="version",
         version=f"%(prog)s {__version__}",
     )
 
