@@ -109,11 +109,11 @@ int r2g(double range,
     
     // Calculate final latitude
     double lat2 = asin(sin(lat1) * cos(angular_distance) + 
-                   cos(lat1) * sin(angular_distance) * cos(brng));
+                  cos(lat1) * sin(angular_distance) * cos(brng));
     
     // Calculate final longitude
     double lon2 = lon1 + atan2(sin(brng) * sin(angular_distance) * cos(lat1),
-                            cos(angular_distance) - sin(lat1) * sin(lat2));
+                  cos(angular_distance) - sin(lat1) * sin(lat2));
     
     // Convert back to degrees
     *latFinal = rad2deg(lat2);
