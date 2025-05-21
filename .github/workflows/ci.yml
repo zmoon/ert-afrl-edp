@@ -38,8 +38,7 @@ jobs:
       with:
         name: iri-edp-output
         path: |
-          iri-edp/src/case1.csv
-          iri-edp/src/case2.csv
+          iri-edp/src/*.csv
         if-no-files-found: error
         retention-days: 1
 
@@ -48,9 +47,7 @@ jobs:
       with:
         name: iri-edp-plots
         path: |
-          iri-edp/src/edp.png
-          iri-edp/src/temp.png
-          iri-edp/src/ratio.png
+          iri-edp/src/*.png
         if-no-files-found: error
         retention-days: 1
 
@@ -89,8 +86,6 @@ jobs:
       with:
         name: mandelbrot-images
         path: |
-          mandelbrot/default.jpg
-          mandelbrot/seahorse-tail.jpg
-          mandelbrot/seahorse-valley.jpg
+          mandelbrot/*.jpg
         if-no-files-found: error
         retention-days: 1
