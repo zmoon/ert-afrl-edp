@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install --no-install-recommends gnuplot
+        sudo apt-get install gnuplot
       
     - name: Build project
       run: |
@@ -41,6 +41,7 @@ jobs:
         path: |
           iri-edp/src/case1.csv
           iri-edp/src/case2.csv
+        if-no-files-found: error
         retention-days: 1
 
     - name: Upload plots
@@ -51,6 +52,7 @@ jobs:
           iri-edp/src/edp.png
           iri-edp/src/temp.png
           iri-edp/src/ratio.png
+        if-no-files-found: error
         retention-days: 1
 
   mandelbrot:
@@ -91,4 +93,5 @@ jobs:
           mandelbrot/default.jpg
           mandelbrot/seahorse-tail.jpg
           mandelbrot/seahorse-valley.jpg
+        if-no-files-found: error
         retention-days: 1
