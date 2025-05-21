@@ -15,15 +15,13 @@ int test_g2r_r2g_roundtrip() {
   // Initial: Wallops Islands
   double lon1 = -75.0;
   double lat1 = 37.0;
-  ;
 
   // Target: Puerto Rico
   double lon2 = -66.0;
   double lat2 = 18.0;
 
-  double range, bearing;
-
   // Convert geodetic to radar
+  double range, bearing;
   if (g2r(&range, &bearing, lon1, lat1, lon2, lat2) != 0) {
     printf("Failed to convert geodetic to radar\n");
     return 1;
