@@ -21,7 +21,8 @@
 /* Number of Fortran `outf` array columns that have vertical profile data */
 #define NUM_OUTF_PROFILE 12
 
-/* Number of Fortran `outf` array columns that have vertical profile data + 1 for height */
+/* Number of Fortran `outf` array columns that have vertical profile data + 1
+ * for height */
 #define NUM_PROFILE NUM_OUTF_PROFILE + 1
 
 /* Length of the Fortran `oarr` array */
@@ -42,7 +43,8 @@ extern "C" {
 int iri_init(void);
 
 /**
- * @brief Calculate height array based on start, end, and step, filling `heights`
+ * @brief Calculate height array based on start, end, and step, filling
+ * `heights`
  *
  * @param height_start    Start height in km
  * @param height_end      End height in km
@@ -51,15 +53,12 @@ int iri_init(void);
  *
  * @return Number of height steps calculated
  */
-int iri_heights(
-    double height_start,
-    double height_end,
-    double height_step,
-    double heights[MAX_HEIGHT]
-);
+int iri_heights(double height_start, double height_end, double height_step,
+                double heights[MAX_HEIGHT]);
 
 /**
- * @brief Calculate vertical profile for a specific parameter using the IRI model
+ * @brief Calculate vertical profile for a specific parameter using the IRI
+ * model
  *
  * @param latitude   Latitude in degrees North
  * @param longitude  Longitude in degrees East
@@ -74,18 +73,9 @@ int iri_heights(
  *
  * @return 0 on success, non-zero on error
  */
-int iri_profiles(
-    double latitude,
-    double longitude,
-    int year,
-    int month,
-    int day,
-    double hour,
-    double height_start,
-    double height_end,
-    double height_step,
-    double values[NUM_PROFILE][MAX_HEIGHT]
-);
+int iri_profiles(double latitude, double longitude, int year, int month,
+                 int day, double hour, double height_start, double height_end,
+                 double height_step, double values[NUM_PROFILE][MAX_HEIGHT]);
 
 /**
  * @brief Write height and parameter values to a CSV file
@@ -95,10 +85,8 @@ int iri_profiles(
  *
  * @return 0 on success, non-zero on error
  */
-int iri_write_csv(
-    const char* filename,
-    const double values[NUM_PROFILE][MAX_HEIGHT]
-);
+int iri_write_csv(const char *filename,
+                  const double values[NUM_PROFILE][MAX_HEIGHT]);
 
 #ifdef __cplusplus
 }

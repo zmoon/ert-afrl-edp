@@ -23,14 +23,8 @@
  * @param latFinal Final latitude (deg)
  * @return 0 on success, non-zero on failure
  */
-int g2r(
-    double* range,
-    double* bearing,
-    double lonInitial,
-    double latInitial,
-    double lonFinal,
-    double latFinal
-);
+int g2r(double *range, double *bearing, double lonInitial, double latInitial,
+        double lonFinal, double latFinal);
 
 /**
  * Radar to Geodetic conversion
@@ -44,13 +38,7 @@ int g2r(
  * @param latFinal Pointer to store calculated final latitude (deg)
  * @return 0 on success, non-zero on failure
  */
-int r2g(
-    double range,
-    double bearing,
-    double lonInitial,
-    double latInitial,
-    double* lonFinal,
-    double* latFinal
-);
+int r2g(double range, double bearing, double lonInitial, double latInitial,
+        double *lonFinal, double *latFinal);
 
 #endif /* COORD_TRAN_LIB_H */
