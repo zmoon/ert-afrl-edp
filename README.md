@@ -1,3 +1,19 @@
-# ert-afrl-edp
+# ERT-AFRL Space Weather
 
-Assessment for an ERT-AFRL position
+_Assessment exercises for an ERT-AFRL position_
+
+[![CI workflow status](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml/badge.svg)](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml)
+
+Each exercise has its own subdirectory:
+
+| Exercise                    | Description                                                                        |
+| :-------------------------- | :--------------------------------------------------------------------------------- |
+| [coord-tran](./coord-tran/) | Coordinate transformation between radar and geodetic coordinates                   |
+| [interp](./interp/)         | Interpolation of unstructured grid data                                            |
+| [iri-edp](./iri-edp/)       | C interface and tools for generating vertical profiles using the IRI-2020 model    |
+| [mandelbrot](./mandelbrot/) | CLI tools to generate and visualize Mandelbrot set images using Node.js and Python |
+| [noaa-rtsw](./noaa-rtsw/)   | Fetch and analyze NOAA real-time solar wind data                                   |
+
+The [CI workflow](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml)
+checks that the code works and stores the outputs (e.g. images)
+as temporary artifacts.
