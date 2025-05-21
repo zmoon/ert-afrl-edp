@@ -37,18 +37,17 @@ int main(int argc, char *argv[]) {
         print_usage();
         return 1;
     }
-    
-    // Parse command line arguments
     double lonInitial = atof(argv[1]);
     double latInitial = atof(argv[2]);
     double range = atof(argv[3]);
     double bearing = atof(argv[4]);
     
-    // Validate input (basic sanity check)
-    if (lonInitial < -180.0 || lonInitial > 180.0 ||
+    // Validate inputs
+    if (lonInitial < -180.0 || lonInitial >= 180.0 ||
         latInitial < -90.0 || latInitial > 90.0 ||
         range < 0.0 || bearing < 0.0 || bearing >= 360.0) {
-        fprintf(stderr, "Error: Invalid inputs. Longitude must be [-180, 180], latitude [-90, 90],\n");
+        fprintf(stderr, "Error: Invalid inputs. ");
+        fprintf(stderr, "Longitude must be [-180, 180), latitude [-90, 90], ");
         fprintf(stderr, "range > 0, bearing [0, 360).\n");
         return 1;
     }

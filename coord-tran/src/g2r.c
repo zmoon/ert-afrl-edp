@@ -37,19 +37,18 @@ int main(int argc, char *argv[]) {
         print_usage();
         return 1;
     }
-    
-    // Parse command line arguments
     double lonInitial = atof(argv[1]);
     double latInitial = atof(argv[2]);
     double lonFinal = atof(argv[3]);
     double latFinal = atof(argv[4]);
     
-    // Validate input (basic sanity check)
-    if (lonInitial < -180.0 || lonInitial > 180.0 ||
-        lonFinal < -180.0 || lonFinal > 180.0 ||
+    // Validate inputs
+    if (lonInitial < -180.0 || lonInitial >= 180.0 ||
+        lonFinal < -180.0 || lonFinal >= 180.0 ||
         latInitial < -90.0 || latInitial > 90.0 ||
         latFinal < -90.0 || latFinal > 90.0) {
-        fprintf(stderr, "Error: Invalid coordinates. Longitude must be [-180, 180], latitude [-90, 90].\n");
+        fprintf(stderr, "Error: Invalid coordinates. ");
+        fprintf(stderr, "Longitude must be [-180, 180), latitude [-90, 90].\n");
         return 1;
     }
     
