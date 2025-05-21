@@ -5,8 +5,6 @@
 
 #include "iri_interface.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /* Function prototypes for Fortran functions */
 extern void read_ig_rz_();
