@@ -31,8 +31,7 @@ jobs:
     - name: Run cases
       run: |
         cd iri-edp/src
-        ./iri -c 1 -o case1.csv
-        ./iri -c 2 -o case2.csv
+        ./plots.sh
         
     - name: Upload output files
       uses: actions/upload-artifact@v4
