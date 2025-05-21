@@ -92,3 +92,23 @@ jobs:
           mandelbrot/*.jpg
         if-no-files-found: error
         retention-days: 1
+
+  coord-tran:
+    name: Coordinate Transformations
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build project
+      run: |
+        cd coord-tran/src
+        make
+
+    - name: Run tests
+      run: |
+        cd coord-tran/src
+        make test
