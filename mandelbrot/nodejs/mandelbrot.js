@@ -53,9 +53,9 @@ function calculatePoint(x, y, maxIterations, bound, power) {
  * @param {Object} options - The generation options
  * @param {number} options.centerX - X-coordinate of the center
  * @param {number} options.centerY - Y-coordinate of the center
- * @param {number} options.width - Width of the view
- * @param {number} options.height - Height of the view
- * @param {number} options.step - Resolution of the view (size of a pixel)
+ * @param {number} options.width - Width in pixels of the result
+ * @param {number} options.height - Height in pixels of the result
+ * @param {number} options.scale - Scale factor (size of a pixel in complex plane units)
  * @param {number} options.maxIterations - Maximum iterations to perform
  * @param {number} options.bound - Divergence cutoff
  * @param {number} options.power - Exponent used in the formula
@@ -67,32 +67,37 @@ function generateMandelbrotData(options) {
     centerY,
     width,
     height,
-    step,
+    scale,
     maxIterations,
     bound,
     power
   } = options;
   
-  // Calculate the boundaries of the viewport
-  const minX = centerX - width / 2;
-  const maxX = centerX + width / 2;
-  const minY = centerY - height / 2;
-  const maxY = centerY + height / 2;
+  // Calculate the total view dimensions in the complex plane
+  const viewWidth = width * scale;
+  const viewHeight = height * scale;
   
-  // Calculate the number of points in each dimension
-  const numX = Math.ceil(width / step);
-  const numY = Math.ceil(height / step);
+  // Calculate the boundary pixel centers
+  const minX = centerX - viewWidth / 2 + scale / 2;
+  const maxX = centerX + viewWidth / 2 - scale / 2;
+  const minY = centerY - viewHeight / 2 + scale / 2;
+  const maxY = centerY + viewHeight / 2 - scale / 2;
   
-  const result = {
+  // Number of points in each dimension are now directly width and height
+  const numX = width;
+  const numY = height;
+    const result = {
     metadata: {
+      // Input
       centerX,
       centerY,
       width,
       height,
-      step,
+      scale,
       maxIterations,
       bound,
       power,
+      // Derived
       numX,
       numY,
       minX,
@@ -105,9 +110,11 @@ function generateMandelbrotData(options) {
   
   // Calculate all points in the viewport
   for (let row = 0; row < numY; row++) {
-    const y = maxY - row * step;
+    // Calculate y coordinate in the complex plane
+    const y = maxY - row * scale;
     for (let col = 0; col < numX; col++) {
-      const x = minX + col * step;
+      // Calculate x coordinate in the complex plane
+      const x = minX + col * scale;
       const iterations = calculatePoint(x, y, maxIterations, bound, power);
       result.points.push({
         x,

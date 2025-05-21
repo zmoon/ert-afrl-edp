@@ -15,9 +15,9 @@ program
   .version('0.0.0')
   .requiredOption('-x, --center-x <center-x>', 'x-coordinate of the center of the view', parseFloat)
   .requiredOption('-y, --center-y <center-y>', 'y-coordinate of the center of the view', parseFloat)
-  .requiredOption('-w, --width <width>', 'width of the view', parseFloat)
-  .requiredOption('-h, --height <height>', 'height of the view', parseFloat)
-  .requiredOption('-s, --step <step>', 'resolution of the view (size of a pixel)', parseFloat)
+  .requiredOption('-w, --width <width>', 'width in pixels of the result', parseInt)
+  .requiredOption('-h, --height <height>', 'height in pixels of the result', parseInt)
+  .requiredOption('-s, --scale <scale>', 'scale factor (size of a pixel)', parseFloat)
   .option('-n, --max-iterations <max-iterations>', 'maximum number of iterations to perform at each pixel', parseInt, 100)
   .option('-b, --bound <bound>', 'divergence cutoff. If the abs(z) >= bound, the iterations stop', parseFloat, 2)
   .option('-p, --power <power>', 'exponent used in the mandelbrot equation', parseInt, 2)
@@ -36,7 +36,7 @@ try {
     centerY: options.centerY,
     width: options.width,
     height: options.height,
-    step: options.step,
+    scale: options.scale,
     maxIterations: options.maxIterations,
     bound: options.bound,
     power: options.power
