@@ -1,6 +1,6 @@
 CC := gcc
 FC := gfortran
-CFLAGS = -Wall -g -I.
+CFLAGS = -g -std=c99 -Wall -Werror -I.
 FCFLAGS := -std=legacy -g -O0 -fbacktrace -fPIC
 LDFLAGS = -L. -lirif -lgfortran -lm -Wl,-rpath,'$$ORIGIN'
 
