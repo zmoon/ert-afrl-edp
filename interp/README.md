@@ -10,7 +10,7 @@ with weights based on their distance from the grid point.
 Run the script, which creates (and optionally shows) the plots (requires `uv`):
 
 ```
-uv run plots.py
+uv run ./plots.py
 ```
 
 ## Notes
