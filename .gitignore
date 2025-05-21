@@ -6,8 +6,8 @@ iri-edp/src/iri
 iri-edp/src/*.csv
 
 node_modules/
-package-lock.json
 *.json
+!package.json
 
 *.jpg
 *.png
