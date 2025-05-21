@@ -57,7 +57,7 @@ function calculatePoint(x, y, maxIterations, bound, power) {
  * @param {number} options.height - Height in pixels of the result
  * @param {number} options.scale - Scale factor (size of a pixel in complex plane units)
  * @param {number} options.maxIterations - Maximum iterations to perform
- * @param {number} options.bound - Divergence cutoff
+ * @param {number} options.bound - Divergence cutoff ("escape radius")
  * @param {number} options.power - Exponent used in the formula
  * @returns {Object} - The Mandelbrot data
  */
@@ -110,10 +110,10 @@ function generateMandelbrotData(options) {
   
   // Calculate all points in the viewport
   for (let row = 0; row < numY; row++) {
-    // Calculate y coordinate in the complex plane
+    // Calculate y coordinate in the complex plane (imaginary part)
     const y = maxY - row * scale;
     for (let col = 0; col < numX; col++) {
-      // Calculate x coordinate in the complex plane
+      // Calculate x coordinate in the complex plane (real part)
       const x = minX + col * scale;
       const iterations = calculatePoint(x, y, maxIterations, bound, power);
       result.points.push({
