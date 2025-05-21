@@ -75,6 +75,9 @@ jobs:
       uses: astral-sh/setup-uv@v6
       with:
         python-version: '3.12'
+        enable-cache: true
+        cache-dependency-glob: |
+          mandelbrot/plot.py
 
     - name: Generate Mandelbrot images
       run: |
