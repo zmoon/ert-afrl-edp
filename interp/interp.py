@@ -56,6 +56,24 @@ fig.tight_layout()
 def idw(xi, yi, zi, xg, yg, *, power=2):
     """Naive inverse distance weighting interpolation.
     (Including all neighbors, not just the nearest ones.)
+
+    Parameters
+    ----------
+    xi, yi, zi : array-like
+        Coordinates and values of the input points.
+        (1-D arrays of the same length.)
+    xg, yg : array
+        1-D arrays of the coordinates to interpolate to.
+    power : float
+        Power of the distance in the weighting function.
+        (Default is 2, which is the most common choice.)
+        The higher the power, the more weight is given to the nearest points.
+
+    Returns
+    -------
+    zg : array
+        Interpolated values at the grid points.
+        (1-D array of the same length as `xg` and `yg`.)
     """
     # Calculate the distance from each point to the grid points
     # We need an array of shape (xg.size, xi.size),
