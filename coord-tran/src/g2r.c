@@ -15,9 +15,11 @@ void print_description() {
 
 void print_usage() {
     printf("Usage: g2r <lon1> <lat1> <lon2> <lat2>\n");
-    printf("  All coordinates should be in decimal degrees.\n\n");
+    printf("  All coordinates should be in decimal degrees.\n");
+    printf("  Output is <range> <bearing>\n");
+    printf("  with range in kilometers and bearing in decimal degrees.\n\n");
     printf("Options:\n");
-    printf("  -h, --help  Display this help message\n\n");
+    printf("  -h, --help  Display this help message.\n\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -60,8 +62,7 @@ int main(int argc, char *argv[]) {
     }
     
     // Output results
-    printf("Range: %.2f km\n", range);
-    printf("Bearing: %.2f deg\n", bearing);
+    printf("%.3f %.4f\n", range, bearing);
     
     return 0;
 }
