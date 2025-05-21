@@ -70,7 +70,7 @@ int g2r(double *range,
     double x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dlon);
     double bearing_rad = atan2(y, x);
     
-    // Convert bearing to degrees, normalized to 0-360
+    // Convert bearing to degrees, normalized to [0, 360)
     *bearing = fmod(rad2deg(bearing_rad) + 360.0, 360.0);
     
     return 0;
@@ -119,7 +119,7 @@ int r2g(double range,
     *latFinal = rad2deg(lat2);
     *lonFinal = rad2deg(lon2);
     
-    // Normalize longitude to [-180, 180]
+    // Normalize longitude to [-180, 180)
     *lonFinal = fmod(*lonFinal + 540.0, 360.0) - 180.0;
     
     return 0;
