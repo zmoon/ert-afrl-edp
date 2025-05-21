@@ -3,10 +3,10 @@ CFLAGS=-g -std=c99 -Wall -Werror -O2 -lm
 BINDIR=../bin
 TARGETS=$(BINDIR)/g2r $(BINDIR)/r2g $(BINDIR)/test
 
+all: prep $(TARGETS)
+
 prep:
 	@mkdir -p $(BINDIR)
-
-all: prep $(TARGETS)
 
 $(BINDIR)/g2r: g2r.c lib.c lib.h
 	$(CC) g2r.c lib.c -o $@ $(CFLAGS)

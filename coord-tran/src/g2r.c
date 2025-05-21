@@ -9,25 +9,29 @@
 #include <string.h>
 #include "lib.h"
 
+void print_description() {
+    printf("Convert geodetic coordinates to radar range and bearing.\n\n");
+}
+
 void print_usage() {
-    printf("Usage: g2r <lon_initial> <lat_initial> <lon_final> <lat_final>\n");
-    printf("  Converts geodetic coordinates to radar range and bearing.\n");
+    printf("Usage: g2r <lon1> <lat1> <lon2> <lat2>\n");
     printf("  All coordinates should be in decimal degrees.\n\n");
     printf("Options:\n");
-    printf("  -h, --help     Display this help message\n\n");
-    printf("Example:\n");
-    printf("  g2r -84.39 33.75 -77.04 38.90\n");
-    printf("  (Atlanta, GA to Washington, DC)\n");
+    printf("  -h, --help  Display this help message\n\n");
 }
 
 int main(int argc, char *argv[]) {
-    // Check for help option
-    if (argc == 2 && (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)) {
-        print_usage();
-        return 0;
+    if (argc == 2) {
+        if ((strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)) {
+            print_description();
+            print_usage();
+            return 0;
+        } else {
+            fprintf(stderr, "Error: Invalid argument '%s'.\n", argv[1]);
+            print_usage();
+            return 1;
+        }
     }
-    
-    // Check if we have the correct number of arguments
     if (argc != 5) {
         fprintf(stderr, "Error: Incorrect number of arguments.\n");
         print_usage();
@@ -49,9 +53,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     
-    double range, bearing;
-    
     // Call the g2r function
+    double range, bearing;
     if (g2r(&range, &bearing, lonInitial, latInitial, lonFinal, latFinal) != 0) {
         fprintf(stderr, "Error: Calculation failed.\n");
         return 1;
@@ -59,7 +62,7 @@ int main(int argc, char *argv[]) {
     
     // Output results
     printf("Range: %.2f km\n", range);
-    printf("Bearing: %.2f degrees\n", bearing);
+    printf("Bearing: %.2f deg\n", bearing);
     
     return 0;
 }
