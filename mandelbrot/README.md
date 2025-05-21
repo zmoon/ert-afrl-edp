@@ -28,3 +28,4 @@ into the Python-based plotting CLI as JSON.
   for the Python script instead of actually making a Python package
   (see [uscrn](https://github.com/zmoon/uscrn) for a package example).
   This is a compact approach, and we can pin dependencies.
+- The calculation could easily be parallelized.

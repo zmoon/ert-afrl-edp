@@ -1,5 +1,7 @@
 /**
- * Coordinate transformation library header
+ * @file
+ * @brief Coordinate transformation library header
+ *
  * Functions for converting between geodetic coordinates and radar measurements
  */
 

@@ -65,6 +65,7 @@ Run the two cases of interest, save the data to `.csv` files, and view the plots
 - I feel a bit bad calling the directory `src`, since it has everything in it.
   Ultimately I'd want to separate the IRI input data files from the Fortran and C source files,
   and place the plotting script elsewhere.
+- Using getopt (`getopt_long`) would make the arg parsing more robust.
 
 ## See also
 

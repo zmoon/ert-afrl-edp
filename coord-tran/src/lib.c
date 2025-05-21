@@ -1,6 +1,7 @@
 /**
- * Coordinate transformation library: radar <-> geodetic
- * Using a spherical Earth model for simplification
+ * @file
+ * @brief Coordinate transformation library: radar <-> geodetic,
+ * using a spherical Earth model for simplification
  */
 
 #include "lib.h"
