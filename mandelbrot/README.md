@@ -21,9 +21,9 @@ into the Python-based plotting CLI as JSON.
 
 ## Notes
 
-* There are smoothing techniques to improve the beauty of the rendering.
+- There are smoothing techniques to improve the beauty of the rendering.
   For example, fractional escape counts.
-* I elected to use
+- I elected to use
   [inline metadata](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies)
   for the Python script instead of actually making a Python package
   (see [uscrn](https://github.com/zmoon/uscrn) for a package example).

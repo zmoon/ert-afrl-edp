@@ -1,6 +1,6 @@
 /**
  * r2g - Radar to Geodetic Coordinate Transformation Tool
- * 
+ *
  * Calculates final coordinates given initial point, range, and bearing
  */
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     double latInitial = atof(argv[2]);
     double range = atof(argv[3]);
     double bearing = atof(argv[4]);
-    
+
     // Validate inputs
     if (lonInitial < -180.0 || lonInitial >= 180.0 ||
         latInitial < -90.0 || latInitial > 90.0 ||
@@ -52,16 +52,16 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "range > 0, bearing [0, 360).\n");
         return 1;
     }
-    
+
     // Call the r2g function
     double lonFinal, latFinal;
     if (r2g(range, bearing, lonInitial, latInitial, &lonFinal, &latFinal) != 0) {
         fprintf(stderr, "Error: Calculation failed.\n");
         return 1;
     }
-    
+
     // Output results
     printf("%.6f, %.6f\n", lonFinal, latFinal);
-    
+
     return 0;
 }

@@ -15,14 +15,14 @@ uv run plots.py
 
 ## Notes
 
-* A more optimized IDW implementation could use a *k*-d tree
+- A more optimized IDW implementation could use a _k_-d tree
   to include only near neighbors in the calculation,
   reducing memory and CPU usage needed to compute the weights.
-* Natural neighbor interpolation would be more interesting to implement,
+- Natural neighbor interpolation would be more interesting to implement,
   but it needs Delaunay triangulation.
   May add it later.
 
 ## See Also
 
-* [`metpy.interpolate`](https://unidata.github.io/MetPy/v1.7/api/generated/metpy.interpolate.html)
+- [`metpy.interpolate`](https://unidata.github.io/MetPy/v1.7/api/generated/metpy.interpolate.html)
   includes many interpolation methods, including natural neighbor

@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief Program to generate a vertical profile from the IRI model
- * 
+ *
  * This program calls the IRI model to generate a vertical profile of
  * electron density or temperature and outputs the results in CSV format.
  */

@@ -14,7 +14,7 @@
 /**
  * Geodetic to Radar conversion (Haversine formula)
  * Calculates range and bearing from initial to final coordinates
- * 
+ *
  * @param range Pointer to store the calculated range (km)
  * @param bearing Pointer to store the calculated initial bearing (deg)
  * @param lonInitial Initial longitude (deg)
@@ -35,7 +35,7 @@ int g2r(
 /**
  * Radar to Geodetic conversion
  * Calculates final coordinates given initial point, range, and bearing
- * 
+ *
  * @param range Distance from initial point (km)
  * @param bearing Initial bearing (deg)
  * @param lonInitial Initial longitude (deg)

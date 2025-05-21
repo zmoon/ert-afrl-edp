@@ -2,6 +2,6 @@
  * Main entry point for the Mandelbrot module
  */
 
-const mandelbrot = require('./mandelbrot');
+const mandelbrot = require("./mandelbrot");
 
 module.exports = mandelbrot;

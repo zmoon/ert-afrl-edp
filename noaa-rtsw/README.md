@@ -4,8 +4,8 @@ https://www.swpc.noaa.gov/products/real-time-solar-wind
 
 Relevant data URLs:
 
-* https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind-1-hour.json
+- https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind-1-hour.json
   (recent data, the URL shared in the problem description)
-* https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind.json
+- https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind.json
   (more data)
-* more detailed data here?: https://services.swpc.noaa.gov/json/rtsw/
+- more detailed data here?: https://services.swpc.noaa.gov/json/rtsw/

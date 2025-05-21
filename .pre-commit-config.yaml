@@ -1,0 +1,38 @@
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: end-of-file-fixer
+        exclude: |
+          (?x)^(
+              iri-edp/.*\.(for|dat|asc)
+          )$
+      - id: trailing-whitespace
+        args: ["--markdown-linebreak-ext=md,markdown"]
+        exclude: |
+          (?x)^(
+              iri-edp/.*\.(for|dat|asc)
+          )$
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.8
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+      # - id: ruff-format
+
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: "v3.5.3"
+    hooks:
+      - id: prettier
+
+ci:
+  autoupdate_schedule: monthly

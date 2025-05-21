@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief C interface for the International Reference Ionosphere (IRI) model
- * 
+ *
  * This header provides C-callable functions to access the IRI model
  * for calculating ionospheric parameters and saving the output.
  */
@@ -33,7 +33,7 @@ extern "C" {
 
 /**
  * @brief Initialize the IRI model
- * 
+ *
  * This function must be called before any other IRI function to
  * initialize the model's internal data.
  *
@@ -43,12 +43,12 @@ int iri_init(void);
 
 /**
  * @brief Calculate height array based on start, end, and step, filling `heights`
- * 
+ *
  * @param height_start    Start height in km
  * @param height_end      End height in km
  * @param height_step     Height step in km
  * @param heights         Output array to store heights
- * 
+ *
  * @return Number of height steps calculated
  */
 int iri_heights(
@@ -60,7 +60,7 @@ int iri_heights(
 
 /**
  * @brief Calculate vertical profile for a specific parameter using the IRI model
- * 
+ *
  * @param latitude   Latitude in degrees North
  * @param longitude  Longitude in degrees East
  * @param year       Year (4 digits)
@@ -71,7 +71,7 @@ int iri_heights(
  * @param height_end      End height in km
  * @param height_step     Height step in km
  * @param values     Output array for the profile data
- * 
+ *
  * @return 0 on success, non-zero on error
  */
 int iri_profiles(
@@ -89,10 +89,10 @@ int iri_profiles(
 
 /**
  * @brief Write height and parameter values to a CSV file
- * 
+ *
  * @param filename  Output filename, or NULL for stdout
  * @param values    Array of profile values (height first)
- * 
+ *
  * @return 0 on success, non-zero on error
  */
 int iri_write_csv(

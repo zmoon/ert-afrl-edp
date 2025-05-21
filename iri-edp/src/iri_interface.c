@@ -24,7 +24,7 @@ extern void iri_sub_(
     float oarr[NUM_OARR]
 );
 
-/* 
+/*
  * Default JF switches array for standard IRI operation
  * Recommended default values from iritest.for,
  * + ion densities in m-3.
@@ -119,7 +119,7 @@ int iri_profiles(
     /* Use single-precision float arrays for Fortran function outputs */
     float f_outf[MAX_HEIGHT][NUM_OUTF];
     float f_oarr[NUM_OARR];
-    
+
     /* Convert double-precision parameters to single for Fortran */
     float f_latitude = (float)latitude;
     float f_longitude = (float)longitude;
@@ -180,7 +180,7 @@ int iri_write_csv(
     const double values[NUM_PROFILE][MAX_HEIGHT]
 ) {
     FILE* fp;
-    
+
     /* Open file for writing or use stdout */
     if (filename != NULL) {
         fp = fopen(filename, "w");

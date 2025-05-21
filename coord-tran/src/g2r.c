@@ -1,6 +1,6 @@
 /**
  * g2r - Geodetic to Radar Coordinate Transformation Tool
- * 
+ *
  * Calculates range and bearing between two geographic points
  */
 
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     double latInitial = atof(argv[2]);
     double lonFinal = atof(argv[3]);
     double latFinal = atof(argv[4]);
-    
+
     // Validate inputs
     if (lonInitial < -180.0 || lonInitial >= 180.0 ||
         lonFinal < -180.0 || lonFinal >= 180.0 ||
@@ -53,16 +53,16 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Longitude must be [-180, 180), latitude [-90, 90].\n");
         return 1;
     }
-    
+
     // Call the g2r function
     double range, bearing;
     if (g2r(&range, &bearing, lonInitial, latInitial, lonFinal, latFinal) != 0) {
         fprintf(stderr, "Error: Calculation failed.\n");
         return 1;
     }
-    
+
     // Output results
     printf("%.3f %.4f\n", range, bearing);
-    
+
     return 0;
 }
