@@ -93,6 +93,38 @@ jobs:
         if-no-files-found: error
         retention-days: 1
 
+  interp:
+    name: Interpolation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python (uv)
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: '3.12'
+        enable-cache: true
+        cache-dependency-glob: |
+          interp/plots.py
+
+    - name: Generate the plots
+      run: |
+        cd interp
+        uv run plots.py
+    
+    - name: Upload plots
+      uses: actions/upload-artifact@v4
+      with:
+        name: interp-plots
+        path: |
+          interp/*.png
+        if-no-files-found: error
+        retention-days: 1
+
   coord-tran:
     name: Coordinate Transformations
     runs-on: ubuntu-latest

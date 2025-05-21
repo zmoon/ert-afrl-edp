@@ -7,10 +7,10 @@ with weights based on their distance from the grid point.
 
 ## Usage
 
-Run the script, which shows the plots (requires `uv`):
+Run the script, which creates (and optionally shows) the plots (requires `uv`):
 
 ```
-./interp.py
+uv run plots.py
 ```
 
 ## Notes
