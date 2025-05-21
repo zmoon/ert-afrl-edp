@@ -37,3 +37,43 @@ jobs:
           iri-edp/src/case1.csv
           iri-edp/src/case2.csv
         retention-days: 1
+
+  mandelbrot:
+    name: Mandelbrot
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts'
+
+    - name: Install Node.js dependencies
+      run: |
+        cd mandelbrot/nodejs
+        npm install
+
+    - name: Set up Python (uv)
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: '3.12'
+
+    - name: Generate Mandelbrot images
+      run: |
+        cd mandelbrot
+        ./plots.sh
+
+    - name: Upload Mandelbrot images
+      uses: actions/upload-artifact@v4
+      with:
+        name: mandelbrot-images
+        path: |
+          mandelbrot/default.jpg
+          mandelbrot/seahorse-tail.jpg
+          mandelbrot/seahorse-valley.jpg
+        retention-days: 1

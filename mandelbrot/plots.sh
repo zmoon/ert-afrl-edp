@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Classic Mandelbrot, zoomed out
 ./nodejs/cli.js -x '-0.7' -y 0 -q -w 600 -h 400 -s 0.005 | uv run ./plot.py -o default.jpg
 
