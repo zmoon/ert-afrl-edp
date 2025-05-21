@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 /**
  * CLI application for generating Mandelbrot set data
  */

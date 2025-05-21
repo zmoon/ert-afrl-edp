@@ -7,5 +7,7 @@ iri-edp/src/*.csv
 
 node_modules/
 package-lock.json
+*.json
+*.jpg
 
 .vscode/
