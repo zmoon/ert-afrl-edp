@@ -19,7 +19,7 @@ void print_usage() {
     printf("  Output is <range> <bearing>\n");
     printf("  with range in kilometers and bearing in decimal degrees.\n\n");
     printf("Options:\n");
-    printf("  -h, --help  Display this help message.\n\n");
+    printf("  -h, --help  Display this help message (must be the only arg).\n\n");
 }
 
 int main(int argc, char *argv[]) {

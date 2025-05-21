@@ -15,10 +15,10 @@ void print_description() {
 
 void print_usage() {
     printf("Usage: r2g <lon1> <lat1> <range> <bearing>\n");
-    printf("  Coordinates in decimal degrees, range in kilometers, bearing in deimcal degrees.\n");
+    printf("  Coordinates in decimal degrees, range in kilometers, bearing in decimal degrees.\n");
     printf("  Output is <lon2> <lat2> (decimal degrees).\n\n");
     printf("Options:\n");
-    printf("  -h, --help  Display this help message.n\n");
+    printf("  -h, --help  Display this help message (must be the only arg).\n\n");
 }
 
 int main(int argc, char *argv[]) {
