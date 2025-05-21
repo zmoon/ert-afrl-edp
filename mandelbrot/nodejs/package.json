@@ -1,6 +1,6 @@
 {
   "name": "mandelbrot",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "CLI to compute Mandelbrot set image data",
   "main": "index.js",
   "bin": {

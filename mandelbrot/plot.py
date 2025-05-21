@@ -16,6 +16,8 @@ import json
 import sys
 from pathlib import Path
 
+__version__ = "0.1.0"
+
 HERE = Path(__file__).parent
 
 
@@ -97,6 +99,10 @@ def main() -> None:
     parser.add_argument(
         "--show", action="store_true",
         help="Show the plot",
+    )
+    parser.add_argument(
+        "--version", action="version",
+        version=f"%(prog)s {__version__}",
     )
 
     args = parser.parse_args()

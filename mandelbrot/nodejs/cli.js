@@ -16,7 +16,7 @@ function myParseInt(value, previous) {
 program
   .name('mandelbrot')
   .description('CLI to generate data for visualizing the Mandelbrot set')
-  .version('0.0.0')
+  .version('0.1.0')
   .option('-x, --center-x <center-x>', 'x-coordinate of the center of the view', parseFloat, -0.5)
   .option('-y, --center-y <center-y>', 'y-coordinate of the center of the view', parseFloat, 0)
   .option('-w, --width <width>', 'width in pixels of the result', myParseInt, 300)
