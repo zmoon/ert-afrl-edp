@@ -9,6 +9,9 @@ make -j 2
 ./iri -c 1 -o case1.csv
 ./iri -c 2 -o case2.csv
 
+# TODO: save with
+# set term pngcairo size 800,600; \
+# set output 'edp.png'; \
 gnuplot -p -e " \
   set datafile separator ','; \
   set title 'Electron density profiles at 37.8°N, 75.4°W'; \

@@ -36,7 +36,7 @@ Run the two cases of interest, save the data to `.csv` files, and view the plots
 (`gnuplot` required):
 
 ```
-./plot.sh
+./plots.sh
 ```
 
 ## Notes
