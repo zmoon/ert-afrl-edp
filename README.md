@@ -9,7 +9,7 @@ Each exercise has its own subdirectory:
 | Exercise                    | Description                                                                        |
 | :-------------------------- | :--------------------------------------------------------------------------------- |
 | [coord-tran](./coord-tran/) | Coordinate transformation between radar and geodetic coordinates                   |
-| [interp](./interp/)         | Interpolation of unstructured grid data                                            |
+| [interp](./interp/)         | Interpolation of scattered point data to a structured grid                         |
 | [iri-edp](./iri-edp/)       | C interface and tools for generating vertical profiles using the IRI-2020 model    |
 | [mandelbrot](./mandelbrot/) | CLI tools to generate and visualize Mandelbrot set images using Node.js and Python |
 | [noaa-rtsw](./noaa-rtsw/)   | Fetch and analyze NOAA real-time solar wind data                                   |
