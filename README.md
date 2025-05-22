@@ -3,6 +3,7 @@
 _Assessment exercises for an ERT-AFRL scientific software engineer position related to impacts of the ionosphere_
 
 [![CI workflow status](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml/badge.svg)](https://github.com/zmoon/ert-afrl-edp/actions/workflows/ci.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/zmoon/ert-afrl-edp/main.svg)](https://results.pre-commit.ci/latest/github/zmoon/ert-afrl-edp/main)
 
 Each exercise has its own subdirectory:
 
