@@ -12,6 +12,8 @@ node_modules/
 *.jpg
 *.png
 
+fetches/
+
 bin/
 
 .vscode/
