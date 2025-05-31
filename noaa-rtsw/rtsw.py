@@ -19,6 +19,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import requests
 import stamina
 
 if TYPE_CHECKING:
@@ -34,11 +35,10 @@ URL = f"{BASE}/propagated-solar-wind.json"
 URL_1H = f"{BASE}/propagated-solar-wind-1-hour.json"
 
 
-@stamina.retry(on=Exception)
+@stamina.retry(on=requests.exceptions.RequestException)
 def get(*, hour: bool = True) -> pd.DataFrame:
     """Retrieve the data and coerce to DataFrame."""
     import pandas as pd
-    import requests
 
     r = requests.get(URL_1H if hour else URL)
     r.raise_for_status()
