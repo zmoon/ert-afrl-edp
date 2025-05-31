@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv run --script
 """
 Load and display NOAA RTSW data
 """
