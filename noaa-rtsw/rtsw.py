@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run --script
 """
-Load and display NOAA RTSW data
+Fetch NOAA RTSW data.
 """
 # /// script
 # requires-python = ">=3.9"
@@ -24,6 +24,7 @@ if TYPE_CHECKING:
 
 HERE = Path(__file__).parent
 FETCHES = HERE / "fetches"
+"""Directory in which the fetches are stored."""
 
 BASE = "https://services.swpc.noaa.gov/products/geospace/"
 URL = f"{BASE}/propagated-solar-wind.json"
@@ -31,6 +32,7 @@ URL_1H = f"{BASE}/propagated-solar-wind-1-hour.json"
 
 
 def get(*, hour: bool = True) -> pd.DataFrame:
+    """Retrieve the data and coerce to DataFrame."""
     import pandas as pd
     import requests
 
@@ -62,9 +64,7 @@ def plot(
     column: str = "speed",
     label: str = "speed [km/s]",
 ) -> mpl.axes.Axes:
-    """
-    Plot the data in the DataFrame
-    """
+    """Plot a time series the DataFrame."""
     # Normal resolution seems to be 1 minute
     # but sometimes times are missing
     # We need consistent interval to get the nice pandas plot
@@ -87,6 +87,10 @@ def plot(
 
 
 def save(df: pd.DataFrame) -> Path:
+    """Save the DataFrame to a Parquet file.
+
+    Note that ``retrieved_at`` from the attributes dict is used to name the file.
+    """
     import pandas as pd
 
     FETCHES.mkdir(exist_ok=True, parents=True)

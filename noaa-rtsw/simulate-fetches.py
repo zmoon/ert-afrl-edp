@@ -1,6 +1,7 @@
 #!/usr/bin/env -S uv run --script
 """
 Simulate making multiple 1-hour fetches over time using the 7-day file.
+(In order to use them for the dashboard and prediction tasks.)
 """
 # /// script
 # dependencies = [
