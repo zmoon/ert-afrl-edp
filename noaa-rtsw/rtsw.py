@@ -10,6 +10,7 @@ Fetch NOAA RTSW data.
 #   "pandas ~=2.2",
 #   "pyarrow",
 #   "requests",
+#   "stamina",
 # ]
 # ///
 
@@ -17,6 +18,8 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import TYPE_CHECKING
+
+import stamina
 
 if TYPE_CHECKING:
     import matplotlib as mpl
@@ -31,6 +34,7 @@ URL = f"{BASE}/propagated-solar-wind.json"
 URL_1H = f"{BASE}/propagated-solar-wind-1-hour.json"
 
 
+@stamina.retry(on=Exception)
 def get(*, hour: bool = True) -> pd.DataFrame:
     """Retrieve the data and coerce to DataFrame."""
     import pandas as pd
@@ -65,6 +69,8 @@ def plot(
     label: str = "speed [km/s]",
 ) -> mpl.axes.Axes:
     """Plot a time series the DataFrame."""
+    import pandas as pd
+
     # Normal resolution seems to be 1 minute
     # but sometimes times are missing
     # We need consistent interval to get the nice pandas plot
