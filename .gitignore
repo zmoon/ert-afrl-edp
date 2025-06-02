@@ -13,6 +13,7 @@ node_modules/
 *.png
 
 fetches/
+ace-sw-archive*.parquet
 __pycache__/
 
 bin/
