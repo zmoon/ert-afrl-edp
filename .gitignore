@@ -11,6 +11,7 @@ node_modules/
 
 *.jpg
 *.png
+!noaa-rtsw/sw-strength-sustain-2025-05-24.png
 
 fetches/
 ace-sw-archive*.parquet

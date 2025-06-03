@@ -5,9 +5,9 @@ https://www.swpc.noaa.gov/products/real-time-solar-wind
 Relevant data URLs:
 
 - https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind-1-hour.json
-  (recent data, the URL shared in the problem description, 1-minute resolution)
+  (recent hour of data, the URL shared in the problem description, 1-minute resolution)
 - https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind.json
-  (recent 7 days of data, 1-hour resolution)
+  (recent 7 (8?) days of data, 1-hour resolution)
 - more detailed data here?: https://services.swpc.noaa.gov/json/rtsw/
 
 Fetch the latest real-time data:
@@ -61,22 +61,25 @@ and configure a cron job to run it every hour.
 
 ### Early warning?
 
-Using the simulated fetches, I created some plots that use the solar wind speed data to give some indication of solar storm activity.
+Using the simulated fetches, I created some plots that use the solar wind speed data to give some indication of solar storm activity. For example:
 
-The code is a [marimo notebook](https://marimo.io/), which can be run with
+![RTSW strength and sustain example](./sw-strength-sustain-2025-05-24.png)
+
+The code is a [marimo notebook](https://marimo.io/), which can be run with:
 
 ```
 uvx marimo run --sandbox early-warning.py
 ```
 
-(dashboard/app mode)
-or edited with
+(dashboard/app mode, featuring some interactivity)
+
+Or you can edit with:
 
 ```
 uvx marimo edit --sandbox early-warning.py
 ```
 
-(like the Python scripts, it has embedded dependency information, which `uv` will automatically resolve).
+Like the Python scripts, the notebook has embedded dependency information, which `uv` will automatically resolve.
 
 ### Forecasting?
 
