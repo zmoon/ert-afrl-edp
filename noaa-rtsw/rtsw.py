@@ -54,6 +54,8 @@ def get(*, hour: bool = True) -> pd.DataFrame:
             df[col] = pd.to_datetime(df[col])
         else:
             df[col] = pd.to_numeric(df[col], errors="coerce")
+        if df[col].dtype == "float64":
+            df[col] = df[col].astype("float32")
 
     df.attrs.update(
         retrieved_at=str(pd.Timestamp.now("UTC")),
