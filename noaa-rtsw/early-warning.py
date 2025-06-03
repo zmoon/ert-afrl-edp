@@ -1,6 +1,7 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
+#     "marimo",
 #     "matplotlib==3.10.3",
 #     "numpy==2.2.6",
 #     "pandas==2.2.3",
@@ -18,13 +19,14 @@ app = marimo.App(width="medium")
 def _():
     from pathlib import Path
 
+    import marimo as mo
     import matplotlib.pyplot as plt
     import numpy as np
     import pandas as pd
     from matplotlib.lines import Line2D
 
     HERE = Path(__file__).parent
-    return HERE, Line2D, np, pd, plt
+    return HERE, Line2D, mo, np, pd, plt
 
 
 @app.cell
@@ -43,25 +45,52 @@ def _(HERE, pd):
 
 
 @app.cell
-def _(df):
-    (df["speed"].plot(figsize=(8, 3.5), xlabel="UTC"))
+def _(mo):
+    diff_roll_slider = mo.ui.slider(1, 10, value=3)
+    mo.md(
+        f"Choose smoothing window (hours) for solar wind cceleration plot: {diff_roll_slider}"
+    )
+    return (diff_roll_slider,)
+
+
+@app.cell
+def _(df, diff_roll_slider):
+    def _():
+        ax = df["speed"].plot(figsize=(8, 4), xlabel="UTC", ylabel="speed [km/s]")
+
+        ax2 = ax.twinx()
+        s = df["speed"].rolling(f"{diff_roll_slider.value}h", center=True).mean()
+        dt = s.index.diff().to_series().dt.total_seconds() / 3600
+        (s.diff() / dt.values).plot(ax=ax2, ls=":", c="C1")
+        ax2.set_ylabel("acceleration [km/s/h]")
+
+        ax.get_figure().tight_layout()
+
+        return ax
+
+    _()
     return
 
 
 @app.cell
-def _():
-    # Trend as warning sign
-    return
+def _(mo):
+    classify_arr = mo.ui.array(
+        [
+            mo.ui.slider(1, 10, value=3, label="window"),
+            mo.ui.radio(
+                options=["both", "left", "right", "neither"],
+                value="both",
+                label="closed",
+            ),
+        ]
+    )
+
+    mo.md(f"Control the assessment of sustain:\n{classify_arr}")
+    return (classify_arr,)
 
 
 @app.cell
-def _(df):
-    df["speed"].isnull().value_counts()
-    return
-
-
-@app.cell
-def _(df, np, pd):
+def _(classify_arr, df, np, pd):
     # Classify data
 
     cuts = [500, 600, 800, np.inf]
@@ -78,7 +107,10 @@ def _(df, np, pd):
     # Look for sustained regions
     # For a given point, the window can be left or right of it
     # Need to consider measurement window when flipping series (maybe shift)
-    window, closed = "3h", "both"
+    # window, closed = "3h", "both"
+    window, closed = classify_arr.value
+    if isinstance(window, int):
+        window = f"{window}h"
     codes = df["strength"].cat.codes
     df["sustained"] = codes.rolling(window, closed=closed).apply(sustained).astype(
         bool
@@ -93,9 +125,11 @@ def _(Line2D, colors, cuts, df, labels, linewidths, np, plt):
     ax = (
         df["sustained"]
         .astype(int)
-        .plot(figsize=(10, 4), label="sustained (1=yes)", c="C2")
+        .plot(figsize=(8, 4), label="sustained (1=yes)", c="C2")
     )
-    df["strength"].cat.codes.astype(int).plot(ax=ax, label="strength code", c="C0")
+    df["strength"].cat.codes.astype(int).plot(
+        ax=ax, label="strength code\n(0=moderate)", c="C0"
+    )
     ax.set_xlabel("UTC")
     ax.legend(loc="upper left")
 
@@ -111,7 +145,9 @@ def _(Line2D, colors, cuts, df, labels, linewidths, np, plt):
         # We use `.where` instead of selecting the data
         # so that the lines won't be connected where they shouldn't
         df.where(df["strength"].eq(cat) & df["sustained"])["speed"].plot(
-            c=color, ax=ax2, lw=lw
+            c=color,
+            ax=ax2,
+            lw=lw,
         )
 
     handles = [
@@ -121,6 +157,8 @@ def _(Line2D, colors, cuts, df, labels, linewidths, np, plt):
 
     # Reset needed after colored plots
     ax.set_xlim(xmin=df.index.min())
+
+    ax.get_figure().tight_layout()
 
     # So marimo will show it
     ax
