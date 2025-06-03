@@ -139,7 +139,8 @@ def main() -> int:
     df = get(hour=args.hour)
 
     if args.save:
-        _ = save(df)
+        p = save(df)
+        print(p.relative_to(HERE).as_posix())
 
     if args.show:
         import matplotlib.pyplot as plt
