@@ -144,3 +144,26 @@ jobs:
         run: |
           cd coord-tran/src
           make test
+
+  noaa-rtsw:
+    name: NOAA RTSW
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python (uv)
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: |
+            noaa-rtsw/rtsw.py
+
+      - name: Test the fetch script
+        run: |
+          cd noaa-rtsw
+          uv run ./rtsw.py
