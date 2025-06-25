@@ -11,7 +11,7 @@
 
 import marimo
 
-__generated_with = "0.13.15"
+__generated_with = "0.14.7"
 app = marimo.App(width="medium")
 
 
@@ -48,7 +48,7 @@ def _(HERE, pd):
 def _(mo):
     diff_roll_slider = mo.ui.slider(1, 10, value=3)
     mo.md(
-        f"Choose smoothing window (hours) for solar wind cceleration plot: {diff_roll_slider}"
+        f"Choose smoothing window (hours) for solar wind acceleration plot: {diff_roll_slider}"
     )
     return (diff_roll_slider,)
 
