@@ -15,7 +15,7 @@ Build (requires `make` and `gcc`):
 make -C src
 ```
 
-Get range and bearing for the example locations of interest:
+Get range (km) and bearing (deg) for the example locations of interest:
 
 ```
 > ./bin/g2r -75 37 -66 18
@@ -76,4 +76,42 @@ but the bearing is not well-defined.
 ```
 > ./bin/g2r 0 90 0 -90
 Error: Invalid coordinates. Cannot calculate bearing for two pole points.
+```
+
+## Directions
+
+`g2r` examples, considering initial point 30°N, 0°E.
+Recall the output is range and bearing.
+
+```
+> ./bin/g2r 0 30 0 30
+0.000 0.0000
+```
+
+N:
+
+```
+> ./bin/g2r 0 30 0 40
+1111.949 0.0000
+```
+
+S:
+
+```
+> ./bin/g2r 0 30 0 20
+1111.949 180.0000
+```
+
+E:
+
+```
+> ./bin/g2r 0 30 10 30
+962.670 87.4952
+```
+
+W:
+
+```
+> ./bin/g2r 0 30 -10 30
+962.670 272.5048
 ```
