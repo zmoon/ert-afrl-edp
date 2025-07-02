@@ -26,7 +26,7 @@ Recover final location:
 
 ```
 > ./bin/r2g -75 37 $(./bin/g2r -75 37 -66 18)
--65.999993, 17.999999
+-65.999993 17.999999
 ```
 
 > [!NOTE]
@@ -41,7 +41,7 @@ If we are at a pole, the `r2g` final longitude depends entirely on bearing.
 
 ```
 > ./bin/r2g 0 90 222 45
-135.000000, 88.003506
+135.000000 88.003506
 ```
 
 ```
@@ -53,7 +53,7 @@ At the south pole, they are equal.
 
 ```
 > ./bin/r2g 0 -90 222 90
-90.000000, -88.003506
+90.000000 -88.003506
 ```
 
 ```

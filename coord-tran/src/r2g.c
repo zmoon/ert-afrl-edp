@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Output results
-  printf("%.6f, %.6f\n", lonFinal, latFinal);
+  printf("%.6f %.6f\n", lonFinal, latFinal);
 
   return 0;
 }
