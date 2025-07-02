@@ -19,7 +19,7 @@ expected_failures = [
     "./bin/g2r 0 90 45 90",
 ]
 
-code_blocks = []
+examples = []
 in_block = False
 block = None
 with open("README.md", "r") as f:
@@ -27,10 +27,10 @@ with open("README.md", "r") as f:
         if line.startswith("```"):
             if in_block:
                 if (n := len(block)) == 1:
-                    code_blocks.append(Case(command=block[0]))
+                    examples.append(Case(command=block[0]))
                 elif n == 2:
                     assert block[0].startswith("> ")
-                    code_blocks.append(
+                    examples.append(
                         Case(
                             command=block[0][2:],
                             expected=block[1],
@@ -45,7 +45,7 @@ with open("README.md", "r") as f:
         elif in_block:
             block.append(line.rstrip())
 
-for case in code_blocks:
+for case in examples:
     res = subprocess.run(
         case.command,
         shell=True,
