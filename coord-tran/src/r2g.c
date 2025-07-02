@@ -52,6 +52,10 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "range > 0, bearing [0, 360).\n");
     return 1;
   }
+  if (range == 0.0) {
+    fprintf(stderr,
+            "Warning: Input range is zero, so input bearing has no effect.\n");
+  }
 
   // Call the r2g function
   double lonFinal, latFinal;

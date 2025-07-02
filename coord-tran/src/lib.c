@@ -101,8 +101,16 @@ int r2g(double range, double bearing, double lonInitial, double latInitial,
                      cos(lat1) * sin(angular_distance) * cos(brng));
 
   // Calculate final longitude
-  double lon2 = lon1 + atan2(sin(brng) * sin(angular_distance) * cos(lat1),
-                             cos(angular_distance) - sin(lat1) * sin(lat2));
+  // If we are at a pole, the final longitude is determined by the bearing
+  double lon2;
+  if (latInitial == 90.0) {
+    lon2 = M_PI - brng;
+  } else if (latInitial == -90.0) {
+    lon2 = brng;
+  } else {
+    lon2 = lon1 + atan2(sin(brng) * sin(angular_distance) * cos(lat1),
+                        cos(angular_distance) - sin(lat1) * sin(lat2));
+  }
 
   // Convert back to degrees
   *latFinal = rad2deg(lat2);
