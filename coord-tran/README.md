@@ -63,11 +63,11 @@ At the south pole, they are equal.
 
 If two points are at a pole, we know the distance is zero,
 but bearing doesn't really make sense in this case,
-so `g2r` errors.
+so `g2r` outputs a special value for bearing to indicate undetermined (-999).
 
 ```
 > ./bin/g2r 0 90 45 90
-Error: Invalid coordinates. Cannot calculate bearing for two pole points.
+0.000 -999.0000
 ```
 
 From one pole to the other, we know the distance is $\pi r_e$,
@@ -75,7 +75,32 @@ but the bearing is not well-defined.
 
 ```
 > ./bin/g2r 0 90 0 -90
-Error: Invalid coordinates. Cannot calculate bearing for two pole points.
+20015.087 -999.0000
+```
+
+When range is zero, bearing has no effect.
+
+```
+> ./bin/r2g 20 30 0 123
+Warning: Input range is zero, input bearing has no effect.
+20.000000 30.000000
+```
+
+```
+> ./bin/g2r 20 30 20 30
+0.000 -999.0000
+```
+
+```
+> ./bin/r2g 20 30 $(./bin/g2r 20 30 20 30)
+20.000000 30.000000
+```
+
+Works for pole-to-pole too:
+
+```
+> ./bin/r2g 0 90 $(./bin/g2r 0 90 0 -90)
+0.000000 -90.000000
 ```
 
 ## Directions
@@ -85,7 +110,7 @@ Recall the output is range and bearing.
 
 ```
 > ./bin/g2r 0 30 0 30
-0.000 0.0000
+0.000 -999.0000
 ```
 
 N:

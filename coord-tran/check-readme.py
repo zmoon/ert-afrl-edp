@@ -32,7 +32,9 @@ with open(HERE / "README.md", "r") as f:
             if in_block:
                 if (n := len(block)) == 1:
                     examples.append(Case(command=block[0]))
-                elif n == 2:
+                elif n in {2, 3}:
+                    if n == 3:
+                        block[1] = "\n".join(block[1:])
                     assert block[0].startswith("> ")
                     examples.append(
                         Case(

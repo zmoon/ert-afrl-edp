@@ -13,6 +13,9 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+#define EARTH_RADIUS 6371.0         // Earth radius (km)
+#define UNDETERMINED_BEARING -999.0 // Special value for undetermined bearing
+
 /**
  * Geodetic to Radar conversion (Haversine formula)
  * Calculates range and bearing from initial to final coordinates
