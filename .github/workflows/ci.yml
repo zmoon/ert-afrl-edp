@@ -146,7 +146,7 @@ jobs:
           make test
 
       - name: Check the readme code examples
-        run: ./check-readme.py
+        run: ./coord-tran/check-readme.py
 
   noaa-rtsw:
     name: NOAA RTSW

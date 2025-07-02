@@ -7,6 +7,9 @@ from __future__ import annotations
 
 import subprocess
 from dataclasses import dataclass
+from pathlib import Path
+
+HERE = Path(__file__).parent
 
 
 @dataclass
@@ -22,7 +25,7 @@ expected_failures = [
 examples = []
 in_block = False
 block = None
-with open("README.md", "r") as f:
+with open(HERE / "README.md", "r") as f:
     for line in f:
         if line.startswith("```"):
             if in_block:
@@ -49,6 +52,7 @@ for case in examples:
     res = subprocess.run(
         case.command,
         shell=True,
+        cwd=HERE,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
