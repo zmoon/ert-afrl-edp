@@ -52,6 +52,12 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "Longitude must be [-180, 180), latitude [-90, 90].\n");
     return 1;
   }
+  if (latInitial == latFinal && (latInitial == 90.0 || latInitial == -90.0)) {
+    fprintf(stderr, "Error: Invalid coordinates. ");
+    fprintf(stderr, "Cannot calculate range and bearing ");
+    fprintf(stderr, "for two points at a pole.\n");
+    return 1;
+  }
 
   // Call the g2r function
   double range, bearing;
