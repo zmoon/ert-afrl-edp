@@ -145,6 +145,9 @@ jobs:
           cd coord-tran/src
           make test
 
+      - name: Check the readme code examples
+        run: ./check-readme.py
+
   noaa-rtsw:
     name: NOAA RTSW
     runs-on: ubuntu-latest
