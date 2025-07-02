@@ -5,6 +5,7 @@
  */
 
 #include "lib.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,10 +53,9 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "Longitude must be [-180, 180), latitude [-90, 90].\n");
     return 1;
   }
-  if (latInitial == latFinal && (latInitial == 90.0 || latInitial == -90.0)) {
+  if (fabs(latInitial) == 90.0 && fabs(latFinal) == 90.0) {
     fprintf(stderr, "Error: Invalid coordinates. ");
-    fprintf(stderr, "Cannot calculate range and bearing ");
-    fprintf(stderr, "for two points at a pole.\n");
+    fprintf(stderr, "Cannot calculate bearing for two pole points.\n");
     return 1;
   }
 

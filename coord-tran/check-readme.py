@@ -20,6 +20,7 @@ class Case:
 
 expected_failures = [
     "./bin/g2r 0 90 45 90",
+    "./bin/g2r 0 90 0 -90",
 ]
 
 examples = []

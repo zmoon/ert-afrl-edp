@@ -67,5 +67,13 @@ so `g2r` errors.
 
 ```
 > ./bin/g2r 0 90 45 90
-Error: Invalid coordinates. Cannot calculate range and bearing for two points at a pole.
+Error: Invalid coordinates. Cannot calculate bearing for two pole points.
+```
+
+From one pole to the other, we know the distance is $\pi r_e$,
+but the bearing is not well-defined.
+
+```
+> ./bin/g2r 0 90 0 -90
+Error: Invalid coordinates. Cannot calculate bearing for two pole points.
 ```
