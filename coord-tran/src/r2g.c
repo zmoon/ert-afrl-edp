@@ -53,8 +53,8 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   if (range == 0.0) {
-    fprintf(stderr,
-            "Warning: Input range is zero, so input bearing has no effect.\n");
+    fprintf(stderr, "Warning: Input range is zero, ");
+    fprintf(stderr, "so input bearing has no effect.\n");
   }
 
   // Call the r2g function
