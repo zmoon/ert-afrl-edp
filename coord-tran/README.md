@@ -149,3 +149,8 @@ W:
 > ./bin/g2r 0 30 -10 30
 962.670 272.5048
 ```
+
+## See also
+
+- The [Movable Type page](https://www.movable-type.co.uk/scripts/latlong.html)
+  has useful info, and I used the top form for checking answers.
