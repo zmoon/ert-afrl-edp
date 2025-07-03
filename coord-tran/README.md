@@ -26,7 +26,7 @@ Recover final location:
 
 ```
 > ./bin/r2g -75 37 $(./bin/g2r -75 37 -66 18)
--65.999993 17.999999
+-66.0000 18.0000
 ```
 
 > [!NOTE]
@@ -41,24 +41,24 @@ If we are at a pole, the `r2g` final longitude depends entirely on bearing.
 
 ```
 > ./bin/r2g 0 90 222 45
-135.000000 88.003506
+135.0000 88.0035
 ```
 
 ```
 > ./bin/g2r 0 90 $(./bin/r2g 0 90 222 45)
-222.000 45.0000
+222.001 45.0000
 ```
 
 At the south pole, they are equal.
 
 ```
 > ./bin/r2g 0 -90 222 90
-90.000000 -88.003506
+90.0000 -88.0035
 ```
 
 ```
 > ./bin/g2r 0 -90 $(./bin/r2g 0 -90 222 90)
-222.000 90.0000
+222.001 90.0000
 ```
 
 If two points are at a pole, we know the distance is zero,
@@ -83,14 +83,14 @@ When range is zero, bearing has no effect.
 ```
 > ./bin/r2g 20 30 0 123
 Warning: Input range is zero, input bearing has no effect.
-20.000000 30.000000
+20.0000 30.0000
 ```
 
 If you pass undetermined bearing, you don't get the warning.
 
 ```
 > ./bin/r2g 20 30 0 -999
-20.000000 30.000000
+20.0000 30.0000
 ```
 
 Bearing is undetermined for two points in the same location.
@@ -102,14 +102,14 @@ Bearing is undetermined for two points in the same location.
 
 ```
 > ./bin/r2g 20 30 $(./bin/g2r 20 30 20 30)
-20.000000 30.000000
+20.0000 30.0000
 ```
 
 Works for pole-to-pole too:
 
 ```
 > ./bin/r2g 0 90 $(./bin/g2r 0 90 0 -90)
-0.000000 -90.000000
+0.0000 -90.0000
 ```
 
 ## Directions
