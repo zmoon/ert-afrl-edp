@@ -23,6 +23,8 @@ expected_failures = [
     "./bin/g2r 0 90 0 -90",
 ]
 
+prompt = "> "
+
 examples = []
 in_block = False
 block = None
@@ -31,19 +33,18 @@ with open(HERE / "README.md", "r") as f:
         if line.startswith("```"):
             if in_block:
                 if (n := len(block)) == 1:
+                    # One command line, without prompt
+                    assert not block[0].startswith(prompt)
                     examples.append(Case(command=block[0]))
-                elif n in {2, 3}:
-                    if n == 3:
-                        block[1] = "\n".join(block[1:])
-                    assert block[0].startswith("> ")
+                else:
+                    # One command line with prompt, possibly multiple output lines
+                    assert block[0].startswith(prompt)
                     examples.append(
                         Case(
-                            command=block[0][2:],
-                            expected=block[1],
+                            command=block[0][len(prompt) :],
+                            expected="\n".join(block[1:]),
                         )
                     )
-                else:
-                    raise AssertionError
                 in_block = False
             else:
                 in_block = True
