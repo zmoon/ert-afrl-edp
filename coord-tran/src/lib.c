@@ -9,8 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EARTH_RADIUS 6371.0 // Earth radius (km)
-
 /**
  * Convert degrees to radians
  */
@@ -40,6 +38,13 @@ int g2r(double *range, double *bearing, double lonInitial, double latInitial,
     return -1; // Invalid pointers
   }
 
+  // If the points are the same, range is zero and bearing is undetermined
+  if (latInitial == latFinal && lonInitial == lonFinal) {
+    *range = 0.0;
+    *bearing = UNDETERMINED_BEARING;
+    return 0;
+  }
+
   // Convert degrees to radians
   double lat1 = deg2rad(latInitial);
   double lon1 = deg2rad(lonInitial);
@@ -57,6 +62,13 @@ int g2r(double *range, double *bearing, double lonInitial, double latInitial,
 
   // Calculate range (distance)
   *range = EARTH_RADIUS * c;
+
+  // If the points are at the poles (same or opposite pole), bearing is
+  // undetermined
+  if (fabs(latInitial) == 90.0 && fabs(latFinal) == 90.0) {
+    *bearing = UNDETERMINED_BEARING;
+    return 0;
+  }
 
   // Calculate bearing
   double y = sin(dlon) * cos(lat2);
@@ -88,6 +100,21 @@ int r2g(double range, double bearing, double lonInitial, double latInitial,
     return -1; // Invalid pointers
   }
 
+  // If range is zero, stay where we are
+  if (range == 0.0) {
+    *lonFinal = lonInitial;
+    *latFinal = latInitial;
+    return 0;
+  }
+
+  // If we are at a pole, and range is pi r_e, we go to the opposite pole
+  // and keep the same longitude
+  if (fabs(latInitial) == 90.0 && range == EARTH_RADIUS * M_PI) {
+    *latFinal = -latInitial;
+    *lonFinal = lonInitial;
+    return 0;
+  }
+
   // Convert to radians
   double lat1 = deg2rad(latInitial);
   double lon1 = deg2rad(lonInitial);
@@ -101,8 +128,16 @@ int r2g(double range, double bearing, double lonInitial, double latInitial,
                      cos(lat1) * sin(angular_distance) * cos(brng));
 
   // Calculate final longitude
-  double lon2 = lon1 + atan2(sin(brng) * sin(angular_distance) * cos(lat1),
-                             cos(angular_distance) - sin(lat1) * sin(lat2));
+  // If we are at a pole, the final longitude is determined by the bearing
+  double lon2;
+  if (latInitial == 90.0) {
+    lon2 = M_PI - brng;
+  } else if (latInitial == -90.0) {
+    lon2 = brng;
+  } else {
+    lon2 = lon1 + atan2(sin(brng) * sin(angular_distance) * cos(lat1),
+                        cos(angular_distance) - sin(lat1) * sin(lat2));
+  }
 
   // Convert back to degrees
   *latFinal = rad2deg(lat2);
