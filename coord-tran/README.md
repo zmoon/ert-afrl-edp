@@ -86,6 +86,15 @@ Warning: Input range is zero, input bearing has no effect.
 20.000000 30.000000
 ```
 
+If you pass undetermined bearing, you don't get the warning.
+
+```
+> ./bin/r2g 20 30 0 -999
+20.000000 30.000000
+```
+
+Bearing is undetermined for two points in the same location.
+
 ```
 > ./bin/g2r 20 30 20 30
 0.000 -999.0000
