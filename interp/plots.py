@@ -13,8 +13,6 @@ from __future__ import annotations
 
 
 def idw(xi, yi, zi, xg, yg, *, power=2):
-    import numpy as np
-
     """Naive inverse distance weighting interpolation.
     (Including all neighbors, not just the nearest ones.)
 
@@ -36,6 +34,8 @@ def idw(xi, yi, zi, xg, yg, *, power=2):
         Interpolated values at the grid points.
         (1-D array of the same length as `xg` and `yg`.)
     """
+    import numpy as np
+
     # Calculate the distance from each point to the grid points
     # We need an array of shape (xg.size, xi.size),
     # so this becomes memory-intensive pretty quickly.
